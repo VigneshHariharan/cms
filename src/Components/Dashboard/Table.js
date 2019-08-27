@@ -44,12 +44,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteComplaints: () => dispatch({ type: "CLEAR_ALL" })
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Table)
+export default connect(mapStateToProps)(Table)
 
 //  localStorage.setItem("arrs",JSON.stringify([...JSON.parse(arr),{keys3:"val3"}]))

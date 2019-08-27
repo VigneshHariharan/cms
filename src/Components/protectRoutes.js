@@ -1,6 +1,5 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-import { connect } from "react-redux"
 
 class ProtectRoutes extends React.Component {
   render() {
@@ -15,10 +14,4 @@ class ProtectRoutes extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.login.token
-  }
-}
-
-export default connect(mapStateToProps)(ProtectRoutes)
+export default ProtectRoutes
