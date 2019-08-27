@@ -27,19 +27,16 @@ class Dashboard extends Component {
             complaints={this.state.complaints}
             show={this.state.show}
           />
-      
         </div>
       )
     }
     else if (localStorage.getItem("token") === "adminLoggedIn") {
       return (
         <div>
-           <UserDashboard handleClick={this.handleClick}
+          <UserDashboard handleClick={this.handleClick}
             complaints={this.state.complaints}
             show={this.state.show}
           />
-          
-          
         </div>
       )
 

@@ -7,7 +7,7 @@ const complaintInitialState = {
     description: "",
   },
   //complaints not working
-  complaints: localStorage.setItem('complaints',[]),
+  complaints: localStorage.setItem('complaints', []),
 }
 
 
@@ -25,6 +25,5 @@ export const complaintReducer = (state = complaintInitialState, action) => {
         return { ...state, complaints: [] }
       }
       return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
-
   }
 }
