@@ -5,6 +5,7 @@ class Table extends Component {
 
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
+    const { technicians } = this.props
     return (
       <div>
         <table>
@@ -15,7 +16,8 @@ class Table extends Component {
               <th>System Number</th>
               <th>Description</th>
               <th>Created Time</th>
-              <th>Assign Function</th>
+              {localStorage.getItem("token") === "adminLoggedIn" ?
+                <th>Assign Function</th> : ""}
             </tr>
           </thead>
           <tbody>
@@ -27,7 +29,16 @@ class Table extends Component {
                   <td>{state.systemNumber}</td>
                   <td>{state.description}</td>
                   <td>{state.createdTime}</td>
-                  {localStorage.getItem("token") === "adminLogin" ? <td><button>Assign</button></td> : ""}
+                  {localStorage.getItem("token") === "adminLoggedIn" ?
+                    <td><select>
+                      {
+                        technicians.map((tech) => {
+                          return <option>{tech}</option>
+                        })
+                      }
+                    </select>
+                      <button>Assign</button>
+                    </td> : ""}
                 </tr>
               }) : ""
             }
@@ -42,7 +53,8 @@ class Table extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    complaints: state.complaint.complaints
+    complaints: state.complaint.complaints,
+    technicians: state.login.technicians
   }
 }
 
