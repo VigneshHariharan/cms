@@ -14,7 +14,7 @@ const loginInitialState = {
     }
   ],
   admin: [{
-    username: "adminiam",
+    username: "adminiams",
     password: "AdminPass1"
   }],
   technicians: [
@@ -48,17 +48,11 @@ export const loginReducer = (state = loginInitialState, action) => {
          technicians: [...state.technicians, 
           {  username:action.payload.username,
             password:action.payload.password
-          } ]
+          } ],
+          token: localStorage.setItem("token", "technicianLoggedIn")
         }
 
-    case "TECHNICIAN_LOGIN":
-      return {
-        ...state,
-        username: action.payload.username,
-        password: action.payload.password,
-        token: localStorage.setItem("token", "technicianLoggedIn")
-      }
-
+    
     default:
       return state
   }
