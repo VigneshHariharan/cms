@@ -2,8 +2,19 @@ import React, { Component } from 'react'
 
 import Table from "./Table"
 import ComplaintForm from "./complaintForm"
+import Form from './technicianForm/form'
 
 export default class UserDashboard extends Component {
+  constructor(){
+    super()
+    this.state={
+      visible:false,
+    }
+  }
+  handleClick=()=>{
+    this.setState({visible:!this.state.visible})
+  }
+
   render() {
     return (
       <div>
@@ -21,6 +32,9 @@ export default class UserDashboard extends Component {
         {
           this.props.show ? <ComplaintForm show={this.props.handleClick} /> : ""
         }
+        <br/><br/>
+        <button onClick={this.handleClick}>Add a Technician</button>
+        {this.state.visible?<Form/>:''}
 
       </div>
     )
