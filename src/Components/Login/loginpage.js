@@ -27,13 +27,10 @@ class LoginPage extends Component {
       //password check
       ////password must contain one lowercase character,
       //one uppercase character,one number,length above 8
-    return admin.map((admin) => {
-        // to check if username and password are in users list
-        
-        if (username === admin.username
-          && password === admin.password) {
-          return adminLogin(username, password)
 
+      admin.map((admin) => {
+        if (username === admin.username && password === admin.password) {
+          return adminLogin(username, password)
           }      
         else {
           return this.usersLogin(username, password)

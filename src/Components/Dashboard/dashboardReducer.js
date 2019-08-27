@@ -21,12 +21,10 @@ export const complaintReducer = (state = complaintInitialState, action) => {
       return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
 
     default:
-        if (!localStorage.getItem("complaints")) {
-          
-          return { ...state, complaints: [] }
-        }
-        
-    return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
+      if (!localStorage.getItem("complaints")) {
+        return { ...state, complaints: [] }
+      }
+      return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
 
   }
 }
