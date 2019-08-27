@@ -28,6 +28,7 @@ class LoginPage extends Component {
       ////password must contain one lowercase character,
       //one uppercase character,one number,length above 8
       admin.map((admin) => {
+        console.log(username, password, admin, admin.password)
         if (username === admin.username && password === admin.password) {
           return adminLogin(username, password)
         }
