@@ -21,7 +21,7 @@ class LoginPage extends Component {
 
   handleClick = () => {
     // Username and Password submit
-    const { admin, users, shouldLogin, adminLogin } = this.props
+    const {  users, shouldLogin } = this.props
     const { username, password } = this.state
 
     if (username.length > 8 && passwordRegex.test(password)) {
@@ -30,11 +30,7 @@ class LoginPage extends Component {
       //one uppercase character,one number,length above 8
       return users.map((users) => {
         // to check if username and password are in users list
-        admin.map((admin) => {
-          if (username === admin.username && password === admin.password) {
-            return adminLogin(username, password)
-          }
-        })
+        
         if (username === users.username
           && password === users.password) {
           return shouldLogin(username, password)
