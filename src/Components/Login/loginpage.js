@@ -22,7 +22,7 @@ class LoginPage extends Component {
     // Username and Password submit
     const {  users, shouldLogin } = this.props
     const { username, password } = this.state
-
+    // admin map
     if (username.length > 8 && passwordRegex.test(password)) {
       //password check
       ////password must contain one lowercase character,
@@ -99,7 +99,7 @@ class LoginPage extends Component {
     else {
       return <Redirect to="/dashboard"></Redirect>
     }
-   
+
 
   }
 }
