@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
-
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
 class LoginPage extends Component {
@@ -96,6 +95,7 @@ class LoginPage extends Component {
     else {
       return <Redirect to="/dashboard"></Redirect>
     }
+   
 
   }
 }

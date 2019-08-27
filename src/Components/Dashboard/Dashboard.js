@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
+import Form from './technicianForm/form'
 
 
 class Dashboard extends Component {
@@ -26,13 +27,18 @@ class Dashboard extends Component {
             complaints={this.state.complaints}
             show={this.state.show}
           />
+      
         </div>
       )
     }
     else if (localStorage.getItem("token") === "adminLoggedIn") {
       return (
         <div>
-
+           <UserDashboard handleClick={this.handleClick}
+            complaints={this.state.complaints}
+            show={this.state.show}
+          />
+          <Form/>
         </div>
       )
 
