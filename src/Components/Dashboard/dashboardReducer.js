@@ -7,7 +7,7 @@ const complaintInitialState = {
     description: "",
   },
   //complaints not working
-  complaints: [],
+  complaints: localStorage.setItem('complaints',[]),
 }
 
 

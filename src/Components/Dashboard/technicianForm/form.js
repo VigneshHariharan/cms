@@ -23,13 +23,9 @@ class Form extends Component {
     handleClick=()=>{
         const {firstName,lastName,password,cPassword}=this.state;
         const username=`${firstName} ${lastName}`
-        if(username.length>8 && passwordRegex.test(password) && password===cPassword){
-           
+        if(username.length>8 && passwordRegex.test(password) && password===cPassword) {
             this.props.setTechnician(username,password)
-
         }
-       
-
     }
     render() {
         return (

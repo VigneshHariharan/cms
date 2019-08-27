@@ -20,18 +20,18 @@ class LoginPage extends Component {
 
   handleClick = () => {
     // Username and Password submit
-    const { admin, adminLogin } = this.props
+    const {  admin, adminLogin } = this.props
     const { username, password } = this.state
     // admin map
     if (username.length > 8 && passwordRegex.test(password)) {
       //password check
       ////password must contain one lowercase character,
       //one uppercase character,one number,length above 8
+
       admin.map((admin) => {
-        console.log(username, password, admin, admin.password)
         if (username === admin.username && password === admin.password) {
           return adminLogin(username, password)
-        }
+          }      
         else {
           return this.usersLogin(username, password)
         }

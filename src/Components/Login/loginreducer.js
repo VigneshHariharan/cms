@@ -54,6 +54,7 @@ export const loginReducer = (state = loginInitialState, action) => {
         token: localStorage.setItem("token", "technicianLoggedIn"),
       }
 
+
     default:
       return state
   }
