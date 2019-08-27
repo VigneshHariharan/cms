@@ -15,6 +15,7 @@ class Table extends Component {
               <th>System Number</th>
               <th>Description</th>
               <th>Created Time</th>
+              <th>Assign Function</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,7 @@ class Table extends Component {
                   <td>{state.systemNumber}</td>
                   <td>{state.description}</td>
                   <td>{state.createdTime}</td>
+                  {localStorage.getItem("token") === "adminLogin" ? <td><button>Assign</button></td> : ""}
                 </tr>
               }) : ""
             }
