@@ -40,6 +40,7 @@ export const loginReducer = (state = loginInitialState, action) => {
         password: action.payload.password,
         token: localStorage.setItem("token", "adminLoggedIn")
       }
+
     case "TECHNICIAN_LOGIN":
       return {
         ...state,
@@ -49,15 +50,8 @@ export const loginReducer = (state = loginInitialState, action) => {
         {
           username: action.payload.username,
           password: action.payload.password
-        }]
-      }
-
-    case "TECHNICIAN_LOGIN":
-      return {
-        ...state,
-        username: action.payload.username,
-        password: action.payload.password,
-        token: localStorage.setItem("token", "technicianLoggedIn")
+        }],
+        token: localStorage.setItem("token", "technicianLoggedIn"),
       }
 
     default:
