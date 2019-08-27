@@ -25,17 +25,35 @@ class Form extends Component {
         const username=`${firstName} ${lastName}`
         if(username.length>8 && passwordRegex.test(password) && password===cPassword) {
             this.props.setTechnician(username,password)
+            this.setState({
+                firstName:'',
+            lastName:'',
+            password:'',
+            cPassword:''
+
+            })
         }
     }
+    
+    
+    
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSumbit}>
+                First Name:
                 <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+                <br/>
+                Last Name:
                 <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
                 {/* <input type="text" name="userName" value={`${this.state.firstName} ${this.state.lastName}`} onChange={this.handleChange}/> */}
+                <br/>
+                Password:
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-                <input type="password" name="cPassword" value={this.state.cpassword} onChange={this.handleChange}/>
+                <br/>
+                Confirm password:
+                <input type="password" name="cPassword" value={this.state.cPassword} onChange={this.handleChange}/>
+                <br/>
                 <button type="submit" onClick={this.handleClick}>submit</button>
                 </form>
             </div>
