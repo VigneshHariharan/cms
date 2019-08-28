@@ -151,7 +151,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setForm: (block, floor, systemNumber, description) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date())
+        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()),technician:''
       }
     })
   }

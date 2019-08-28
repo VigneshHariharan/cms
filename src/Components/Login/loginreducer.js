@@ -17,7 +17,7 @@ const loginInitialState = {
     username: "adminiams",
     password: "AdminPass1"
   }],
-  technicians: JSON.parse(localStorage.getItem("technicians"))
+  technicians: localStorage.getItem("technicians") ? JSON.parse(localStorage.getItem("technicians")) : []
 
 }
 
