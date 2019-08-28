@@ -5,6 +5,7 @@ const complaintInitialState = {
     floor: "",
     systemNumber: 0,
     description: "",
+    technician:''
   },
   //complaints not working
   complaints: localStorage.getItem("complaints"),
@@ -19,7 +20,10 @@ export const complaintReducer = (state = complaintInitialState, action) => {
       }
       localStorage.setItem("complaints", JSON.stringify([...state.complaints, action.payload]))
       return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
-
+    case 'ASSIGN_TECHNICIAN':
+      state.complaints[action.payload.index].technician = action.payload.technician
+       localStorage.setItem('complaints',JSON.stringify(state.complaints))
+      return {...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
     default:
       if (!localStorage.getItem("complaints")) {
         return { ...state, complaints: [] }
