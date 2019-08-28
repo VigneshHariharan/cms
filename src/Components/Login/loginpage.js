@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
-
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
 class LoginPage extends Component {
@@ -16,32 +15,25 @@ class LoginPage extends Component {
   }
 
   handleChange = (e) => {
-
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleClick = () => {
     // Username and Password submit
-    const { admin, users, shouldLogin, adminLogin } = this.props
+    const { admin, adminLogin } = this.props
     const { username, password } = this.state
-
+    // admin map
     if (username.length > 8 && passwordRegex.test(password)) {
       //password check
       ////password must contain one lowercase character,
       //one uppercase character,one number,length above 8
-      return users.map((users) => {
-        // to check if username and password are in users list
-        admin.map((admin) => {
-          if (username === admin.username && password === admin.password) {
-            return adminLogin(username, password)
-          }
-        })
-        if (username === users.username
-          && password === users.password) {
-          return shouldLogin(username, password)
+
+      admin.map((admin) => {
+        if (username === admin.username && password === admin.password) {
+          return adminLogin(username, password)
         }
         else {
-          return this.setState({ error: "Username or password is wrong" })
+          return this.usersLogin(username, password)
         }
       })
     }
@@ -50,12 +42,35 @@ class LoginPage extends Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  usersLogin = (username, password) => {
+    const { users, shouldLogin } = this.props
+    return users.map((users) => {
+      // to check if username and password are in users list
+      if (username === users.username
+        && password === users.password) {
+        return shouldLogin(username, password)
+      }
+      else {
+        return this.technicianLogin(username, password)
+      }
+    })
   }
 
-  componentWillUnmount() {
-    localStorage.setItem("complaints", [])
+  technicianLogin = (username, password) => {
+    const { technicians, shouldTechnicianLogin } = this.props
+    return technicians.map((technicians) => {
+      if (username === technicians.username
+        && password === technicians.password) {
+        return shouldTechnicianLogin(username, password)
+      }
+      else {
+        return this.setState({ error: "Username or password is wrong" })
+      }
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
   }
 
   render() {
@@ -78,6 +93,7 @@ class LoginPage extends Component {
       return <Redirect to="/dashboard"></Redirect>
     }
 
+
   }
 }
 
@@ -85,7 +101,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.login.token,
     users: state.login.users,
-    admin: state.login.admin
+    admin: state.login.admin,
+    technicians: state.login.technicians
   }
 }
 
@@ -100,7 +117,13 @@ const mapDispatchToProps = (dispatch) => {
       type: "ADMIN_LOGIN", payload: {
         username, password
       }
+    }),
+    shouldTechnicianLogin: (username, password) => dispatch({
+      type: "TECHNICIAN_LOGIN", payload: {
+        username, password
+      }
     })
+
   }
 }
 

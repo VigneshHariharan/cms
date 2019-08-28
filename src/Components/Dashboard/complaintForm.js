@@ -20,7 +20,6 @@ class ComplaintForm extends Component {
       block: "block-1",
       floorNo: [1, 2, 3, 4],
       floor: "floor-1",
-      floorView: true,
       systemNumber: "",
       description: "",
       err: false
@@ -113,7 +112,6 @@ class ComplaintForm extends Component {
           <select name="floor"
             onChange={this.handleChange}
             id="myList"
-            disabled={this.state.floorView}
 
           // value={this.state.floor}
           >

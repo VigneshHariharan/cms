@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import Table from "./Table"
 import ComplaintForm from "./complaintForm"
 
-
 export default class UserDashboard extends Component {
+
   render() {
     return (
       <div>
@@ -14,13 +14,13 @@ export default class UserDashboard extends Component {
         <br></br>
         {/* Table - List of data*/}
         <Table></Table>
-        <button name="logout" onClick={this.handleClick}>Logout</button>
+        <button name="logout" onClick={this.props.handleClick}>Logout</button>
 
         {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
         {
-          this.props.show ? <ComplaintForm show={this.handleClick} /> : ""
+          this.props.show ? <ComplaintForm show={this.props.handleClick} /> : ""
         }
 
       </div>
