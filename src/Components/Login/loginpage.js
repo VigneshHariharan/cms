@@ -20,7 +20,7 @@ class LoginPage extends Component {
 
   handleClick = () => {
     // Username and Password submit
-    const {  admin, adminLogin } = this.props
+    const { admin, adminLogin } = this.props
     const { username, password } = this.state
     // admin map
     if (username.length > 8 && passwordRegex.test(password)) {
@@ -31,7 +31,7 @@ class LoginPage extends Component {
       admin.map((admin) => {
         if (username === admin.username && password === admin.password) {
           return adminLogin(username, password)
-          }      
+        }
         else {
           return this.usersLogin(username, password)
         }
@@ -71,10 +71,6 @@ class LoginPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-  }
-
-  componentWillUnmount() {
-    localStorage.setItem("complaints", [])
   }
 
   render() {
