@@ -2,10 +2,26 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 class Table extends Component {
+  constructor(){
+    super()
+    this.state={
+      technician:''
+    }
+  }
+  handleChange=(e)=>{
+    console.log(e.target.value)
+    this.setState({technician:e.target.value})
+  }
 
+  assignTechnician=()=>{
+    
+
+  }
+  
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     const { technicians } = this.props
+    console.log(technicians)
     return (
       <div>
         <table>
@@ -30,14 +46,17 @@ class Table extends Component {
                   <td>{state.description}</td>
                   <td>{state.createdTime}</td>
                   {localStorage.getItem("token") === "adminLoggedIn" ?
-                    <td><select>
-                      {
+                    <td><select id='tech'onChange={this.handleChange}>
+                      {/* {
                         technicians.map((tech) => {
                           return <option>{tech}</option>
                         })
-                      }
+                      } */}
+                      <option value="" selected disabled hidden>--Select--</option>
+                      <option >Technician-1</option>
+                      <option>Technician-2</option>
                     </select>
-                      <button>Assign</button>
+                      <button onClick={this.assignTechnician}>Assign</button>
                     </td> : ""}
                 </tr>
               }) : ""

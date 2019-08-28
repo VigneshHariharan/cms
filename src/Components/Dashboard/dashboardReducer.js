@@ -6,6 +6,7 @@ const complaintInitialState = {
     systemNumber: 0,
     description: "",
   },
+  technicianName:'',
   //complaints not working
   complaints: localStorage.setItem('complaints', []),
 }

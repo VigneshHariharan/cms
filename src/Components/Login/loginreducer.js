@@ -41,18 +41,15 @@ export const loginReducer = (state = loginInitialState, action) => {
       }
 
     case "TECHNICIAN_LOGIN":
-      let technician = {
-        username: action.payload.username,
-        password: action.payload.password
-      }
-      let technicianStorage = localStorage.setItem('technicians', JSON.stringify(technician))
       return {
         ...state,
         username: action.payload.username,
         password: action.payload.password,
         technicians: [...state.technicians,
-        JSON.parse(technicianStorage)
-        ],
+        {
+          username: action.payload.username,
+          password: action.payload.password
+        }],
         token: localStorage.setItem("token", "technicianLoggedIn"),
       }
 
