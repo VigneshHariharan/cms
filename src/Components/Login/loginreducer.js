@@ -1,7 +1,7 @@
 
 const loginInitialState = {
-  username: "",
-  password: "",
+  username: localStorage.getItem("username"),
+  password: localStorage.getItem("password"),
   token: localStorage.getItem('token'),
   users: [
     {
@@ -26,26 +26,32 @@ export const loginReducer = (state = loginInitialState, action) => {
   switch (action.type) {
     // Login checks in their respective storage login for users,admin,technicians
     case "LOGIN":
+      localStorage.setItem('username', action.payload.username)
+      localStorage.setItem('password', action.payload.password)
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password,
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
         token: localStorage.setItem("token", "loggedIn")
       }
 
     case "ADMIN_LOGIN":
+      localStorage.setItem('username', action.payload.username)
+      localStorage.setItem('password', action.payload.password)
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password,
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
         token: localStorage.setItem("token", "adminLoggedIn")
       }
 
     case "TECHNICIAN_LOGIN":
+      localStorage.setItem('username', action.payload.username)
+      localStorage.setItem('password', action.payload.password)
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password,
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password"),
         token: localStorage.setItem("token", "technicianLoggedIn")
       }
 

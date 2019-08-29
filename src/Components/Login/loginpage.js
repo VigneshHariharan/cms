@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
-import './style.css'
-import 'font-awesome/css/font-awesome.min.css';
+
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
 class LoginPage extends Component {
