@@ -21,18 +21,21 @@ class TableData extends Component {
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
       <td>{state.createdTime}</td>
-      <td>
-        {localStorage.getItem("token") === "adminLoggedIn" ?
-          <td><select onChange={this.handleSelect}>
-            {
-              technicians.map((tech, i) => {
-                return (
-                  <option key={(i * 1000).toString()}>{tech.username}</option>
-                )
-              })
-            }</select>
-            <button onClick={() => this.props.assignTechnician(this.state.selectedOption, this.props.index)}>Assign</button></td> : <td></td>}
-      </td></tr>)
+
+      {localStorage.getItem("token") === "adminLoggedIn" ?
+        <td><select onChange={this.handleSelect}>
+          {
+            technicians.map((tech, i) => {
+              return (
+                <option key={(i * 1000).toString()}>{tech.username}</option>
+              )
+            })
+          }</select>
+          <button onClick={() => this.props.assignTechnician(this.state.selectedOption,
+            this.props.index)}>Assign</button></td>
+        : <td></td>
+      }
+    </tr>)
   }
 }
 

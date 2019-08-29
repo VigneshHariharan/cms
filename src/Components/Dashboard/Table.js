@@ -17,13 +17,13 @@ class Table extends Component {
             {(localStorage.getItem("token") === "adminLoggedIn" ||
               localStorage.getItem("token") === "loggedIn") ?
               complaints ? complaints.map((state, index) => {
-                return <TableData state={state} index={index} key={(index * 2000).toString()} />
+                return <TableData state={state} index={index} key={(index * 10000).toString()} />
               }) : ""
               :
               complaints ? complaints.map((state, index) => {
                 return (this.props.technicianUsername === state.technician ?
-                  <TableData state={state} index={index} key={(index * 3000).toString()}></TableData> : "")
-              }) : <tr><td></td></tr>
+                  <TableData state={state} index={index} key={((index + 1) * 9000).toString()}></TableData> : <tr key={((index + 1) * 8000).toString()}></tr>)
+              }) : ""
             }
           </tbody>
         </table>
