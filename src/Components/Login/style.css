@@ -1,0 +1,76 @@
+
+.login{
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+.formDiv{
+  background-image: linear-gradient(rgb(149, 149, 231),rgb(139, 139, 214),rgb(172, 27, 172));
+  width:275px ;
+  margin:100px auto;
+  border-radius: 10px;
+  padding-top:25px;
+  padding-bottom:50px
+}
+.form{
+  width: 200px;
+  margin:auto;
+}
+ .label{
+   font-size: 20px;
+   color:black
+}
+.button {
+  
+  background-color: white; 
+  border: none;
+  color: rgb(67, 47, 184);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin:4px auto;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: bold;
+  padding:5px 10px ;
+}
+.button:hover{
+  background-image: linear-gradient(rgb(139, 139, 214),rgb(172, 27, 172))
+}
+::placeholder{
+  color: white;
+  opacity: 0.5;
+  font-size: 15px;
+}
+.textbox{
+  width:90%;
+  font-size: 20px;
+  border:0px ;
+  border-bottom:1px solid  rgb(1, 1, 3);
+  background-color: transparent;
+  color:white;
+}
+.textbox:focus{
+  outline: 0;
+  background-color: transparent
+}
+.errorMsg{
+  color:rgb(255, 0, 0);
+  font-size: 20px
+}
+.icon{
+  color:white;
+  width:10%
+}
+.textboxDiv{
+  width: 100%
+}
+.textboxDiv1{
+  padding-top:20px;
+}
+.warning-icon{
+  color: red;
+  text-align: center
+}

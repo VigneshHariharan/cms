@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
+import './style.css'
+import 'font-awesome/css/font-awesome.min.css';
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
 class LoginPage extends Component {
@@ -38,7 +40,7 @@ class LoginPage extends Component {
       })
     }
     else {
-      this.setState({ wrongFormat: "password should have 8 chars,1 upp case,1 low case,1 num" })
+      this.setState({ wrongFormat: "Password should have 8 chars,1 upp case,1 low case,1 num" ,error:''})
     }
   }
 
@@ -64,7 +66,7 @@ class LoginPage extends Component {
         return shouldTechnicianLogin(username, password)
       }
       else {
-        return this.setState({ error: "Username or password is wrong" })
+        return this.setState({ error: "Username or password is wrong" ,wrongFormat:''})
       }
     })
   }
@@ -76,15 +78,27 @@ class LoginPage extends Component {
   render() {
     if (!localStorage.getItem("token")) {
       return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>Username : </label>
-            <input name="username" type="text" onChange={this.handleChange}></input>
-            <br></br>&nbsp;
-        <label>Password : </label>
-            <input name="password" type="password" onChange={this.handleChange}></input>
-            <p>{this.state.error}</p><p>{this.state.wrongFormat}</p>
-            <button type="submit" onClick={this.handleClick}>Login</button>
+        <div className="formDiv">
+          <form className="form" onSubmit={this.handleSubmit}>
+             <p className="login">LOG IN</p>
+            
+            <div className="textboxDiv">
+             <i  className="fa fa-user icon" aria-hidden="true"></i>
+             <input placeholder="Username" className="textbox"name="username" type="text" onChange={this.handleChange}></input>
+             </div>
+
+            <div className="textboxDiv textboxDiv1">
+               <i className="fa fa-lock icon"></i>
+               <input placeholder="Password" className="textbox" name="password" type="password" onChange={this.handleChange}></input>
+           </div> <br/>
+
+          {
+            this.state.error?<i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p  className="errorMsg">{this.state.error}</p></i>:''
+          }
+          {
+           this.state.wrongFormat?<i  class="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p className="errorMsg">{this.state.wrongFormat}</p></i>:''
+          }
+          <div className="textboxDiv1"><button className="button" type="submit" onClick={this.handleClick}>Login</button></div>
           </form>
         </div>
       )
@@ -129,3 +143,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+
+
