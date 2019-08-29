@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
+import "./index.css";
+
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
 class LoginPage extends Component {
@@ -78,7 +80,7 @@ class LoginPage extends Component {
       return (
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label>Username : </label>
+            <label className="css">Username : </label>
             <input name="username" type="text" onChange={this.handleChange}></input>
             <br></br>&nbsp;
         <label>Password : </label>
