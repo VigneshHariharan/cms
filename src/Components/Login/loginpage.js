@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
+
 import './style.css'
 import 'font-awesome/css/font-awesome.min.css';
+
 
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
@@ -60,7 +62,7 @@ class LoginPage extends Component {
       })
     }
     else {
-      this.setState({ wrongFormat: "Password should have 8 chars,1 upp case,1 low case,1 num" ,error:''})
+      this.setState({ wrongFormat: "Password should have 8 chars,1 upp case,1 low case,1 num", error: '' })
     }
   }
 
@@ -86,7 +88,7 @@ class LoginPage extends Component {
         return shouldTechnicianLogin(username, password)
       }
       else {
-        return this.setState({ error: "Username or password is wrong" ,wrongFormat:''})
+        return this.setState({ error: "Username or password is wrong", wrongFormat: '' })
       }
     })
   }
@@ -96,12 +98,12 @@ class LoginPage extends Component {
   }
 
   render() {
-    if (!localStorage.getItem("token")) {
+    const token = localStorage.getItem("token")
+    if (!token) {
       return (
         <div  className="formDiv">
           <form className="form" onSubmit={this.handleSubmit}>
-             <p className="login">LOG IN</p>
-            
+            <p className="login">LOG IN</p>
             <div className="textboxDiv">
              <i  className="fa fa-user icon" aria-hidden="true"></i>
              <input ref={this.userRef} placeholder="Username" className="textbox"name="username" type="text" onKeyPress={this.handleKeyPress} onChange={this.handleChange}></input>

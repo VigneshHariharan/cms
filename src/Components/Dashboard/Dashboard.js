@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
 import Form from './technicianForm/form'
 
+import "./dashboard.css"
 
 class Dashboard extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Dashboard extends Component {
               show={this.state.show}
             />
             <br /><br />
-            <button name="form" onClick={this.handleClick}>Add a Technician</button>
+            <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
             {this.state.visible ? <Form /> : ''}
 
           </div>
