@@ -14,26 +14,28 @@ class TableData extends Component {
   render() {
     const technicians = localStorage.getItem("technicians") ? this.props.technicians : []
     const state = this.props.state
-    const completeStatus=JSON.parse(localStorage.getItem('complaints'))[this.props.index].completeStatus==='Completed'
-    return (<tr><td>{state.block}</td>
+    const completeStatus = JSON.parse(localStorage.getItem('complaints'))[this.props.index].completeStatus === 'Completed'
+    return (<tr><td className="block">{state.block}</td>
       <td>{state.floor}</td>
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
       <td>{state.createdTime}</td>
-
-        {localStorage.getItem("token") === "adminLoggedIn" ?
-          <td><select onChange={this.handleSelect}>
-            {
-              technicians.map((tech, i) => {
-                return (
-                  <option key={(i * 1000).toString()}>{tech.username}</option>
-                )
-              })
-            }</select>
-            <button onClick={() => this.props.assignTechnician(this.state.selectedOption,this.props.index)}>Assign</button></td> : <td></td>}
-      { 
-        localStorage.getItem("token") === "technicianLoggedIn" ?<td><button disabled={completeStatus} onClick={()=>this.props.isCompleted(this.props.index)}>Completed</button>{completeStatus?"Completed":"in-progess"}</td>:<td></td>
-      }</tr>)}
+      {localStorage.getItem("token") === "adminLoggedIn" ?
+        <td><select onChange={this.handleSelect}>
+          {
+            technicians.map((tech, i) => {
+              return (
+                <option key={(i * 1000).toString()}>{tech.username}</option>
+              )
+            })
+          }</select>
+          <button onClick={() => this.props.assignTechnician(this.state.selectedOption, this.props.index)}>Assign</button></td> : <td className="hidden"></td>}
+      {
+        localStorage.getItem("token") === "technicianLoggedIn" ?
+          <td className="status"><button disabled={completeStatus} onClick={() => this.props.isCompleted(this.props.index)}>Completed</button>
+            {completeStatus ? "Completed" : "in-progess"}</td> : <td className="hidden"></td>
+      }</tr>)
+  }
 }
 const mapStateToProps = (state) => {
   return {
@@ -46,9 +48,9 @@ const mapDispatchToProps = (dispatch) => {
       type: 'ASSIGN_TECHNICIAN',
       payload: { technician: technicianName, index }
     }),
-    isCompleted:(index)=>dispatch({
-      type:'COMPLETED_STATUS',
-      payload:{index:index}
+    isCompleted: (index) => dispatch({
+      type: 'COMPLETED_STATUS',
+      payload: { index: index }
     })
   }
 }

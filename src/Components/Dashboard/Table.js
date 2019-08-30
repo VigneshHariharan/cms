@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import TableData from "./tableData"
 import TableHead from "./tableHead"
+import "./table.css"
 
 class Table extends Component {
 
@@ -9,7 +10,7 @@ class Table extends Component {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     return (
       <div>
-        <table>
+        <table id="table">
           <thead>
             <TableHead></TableHead>
           </thead>

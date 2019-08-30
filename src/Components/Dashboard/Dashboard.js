@@ -18,6 +18,8 @@ class Dashboard extends Component {
     this.setState({ show: !this.state.show })
     if (e.target.name === "logout") {
       localStorage.removeItem("token")
+      localStorage.removeItem("username")
+      localStorage.removeItem("password")
     }
     else if (e.target.name === "form") {
       this.setState({ visible: !this.state.visible })
