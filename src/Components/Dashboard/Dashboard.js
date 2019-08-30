@@ -6,24 +6,19 @@ import Form from './technicianForm/form'
 import "./dashboard.css"
 
 class Dashboard extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      show: false,
-      visible: false,
+         visible: false,
     }
   }
 
-  handleClick = (e) => {
-    this.setState({ show: !this.state.show })
-    if (e.target.name === "logout") {
-      localStorage.removeItem("token")
-      localStorage.removeItem("username")
-      localStorage.removeItem("password")
-    }
-    else if (e.target.name === "form") {
+  handleClick =(e)=>{
+  if (e.target.name === "form") {
       this.setState({ visible: !this.state.visible })
     }
+ 
   }
 
   render() {
@@ -31,32 +26,21 @@ class Dashboard extends Component {
       case "loggedIn":
         return (
           <div>
-            <UserDashboard handleClick={this.handleClick}
-              complaints={this.state.complaints}
-              show={this.state.show}
-            />
+            <UserDashboard handleClick={this.handleClick}/>
+             <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>
           </div>
         )
       case "adminLoggedIn":
         return (
-          <div>
-            <UserDashboard handleClick={this.handleClick}
-              complaints={this.state.complaints}
-              show={this.state.show}
-            />
-            <br /><br />
-            <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
-            {this.state.visible ? <Form /> : ''}
-
-          </div>
+        <div>
+                        <UserDashboard handleClick={this.handleClick}/>
+          {this.state.visible ? <Form /> : ''}
+        </div>
         )
       case "technicianLoggedIn":
         return (<div>
           <h1>Technician</h1>
-          <UserDashboard handleClick={this.handleClick}
-            complaints={this.state.complaints}
-            show={this.state.show}
-          />
+          <UserDashboard handleClick={this.handleClick}/>
         </div>
         )
 

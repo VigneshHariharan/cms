@@ -40,17 +40,17 @@ class Form extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSumbit}>
-                    First Name:
+                    <label>First Name:</label>
                 <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} />
                     <br />
-                    Last Name:
+                  <label>  Last Name:</label>
                 <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} />
                     {/* <input type="text" name="userName" value={`${this.state.firstName} ${this.state.lastName}`} onChange={this.handleChange}/> */}
                     <br />
-                    Password:
+                    <label> Password:</label>
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                     <br />
-                    Confirm password:
+                    <label> Confirm password:</label>
                 <input type="password" name="cPassword" value={this.state.cPassword} onChange={this.handleChange} />
                     <br />
                     <button type="submit" onClick={this.handleClick}>submit</button>

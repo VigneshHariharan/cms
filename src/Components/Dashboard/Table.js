@@ -9,8 +9,8 @@ class Table extends Component {
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     return (
-      <div>
-        <table id="table">
+
+        <table id="table" style={{width:'60%',display:'inline'}}>
           <thead>
             <TableHead></TableHead>
           </thead>
@@ -29,7 +29,7 @@ class Table extends Component {
             }
           </tbody>
         </table>
-      </div>
+      
     )
   }
 }
