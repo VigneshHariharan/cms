@@ -1,66 +1,44 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import TableData from "./tableData"
+import TableHead from "./tableHead"
 
 class Table extends Component {
 
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
-    let technicians = localStorage.getItem("technicians") ? this.props.technicians : []
     return (
       <div>
         <table>
           <thead>
-            <tr>
-              <th>Block</th>
-              <th>Floor</th>
-              <th>System Number</th>
-              <th>Description</th>
-              <th>Created Time</th>
-              {localStorage.getItem("token") === "adminLoggedIn" ?
-                <th>Assign Function</th> : ""}
-            </tr>
+            <TableHead></TableHead>
           </thead>
           <tbody>
-            {
+            {(localStorage.getItem("token") === "adminLoggedIn" ||
+              localStorage.getItem("token") === "loggedIn") ?
               complaints ? complaints.map((state, index) => {
-                console.log(complaints)
-                return <tr key={index}>
-                  <td>{state.block}</td>
-                  <td>{state.floor}</td>
-                  <td>{state.systemNumber}</td>
-                  <td>{state.description}</td>
-                  <td>{state.createdTime}</td>
-
-                  {localStorage.getItem("token") === "adminLoggedIn" ?
-                    <td><select>
-                      {
-                        technicians.map((tech, i) => {
-                          return <option key={(i * 1000).toString()}>{tech.username}</option>
-                        })
-                      }
-                    </select>
-                      <button>Assign</button>
-                    </td> : ""}
-                </tr>
+                return <TableData state={state} index={index} key={(index * 10000).toString()} />
+              }) : ""
+              :
+              complaints ? complaints.map((state, index) => {
+                return (this.props.technicianUsername === state.technician ?
+                  <TableData state={state} index={index} key={((index + 1) * 9000).toString()}></TableData>
+                  : <tr key={((index + 1) * 8000).toString()}></tr>)
               }) : ""
             }
           </tbody>
         </table>
-
       </div>
     )
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     complaints: state.complaint.complaints,
-    technicians: state.login.technicians
+    technicians: state.login.technicians,
+    technicianUsername: state.login.username
   }
 }
 
-
 export default connect(mapStateToProps)(Table)
-
-//  localStorage.setItem("arrs",JSON.stringify([...JSON.parse(arr),{keys3:"val3"}]))
