@@ -4,28 +4,48 @@ import Table from "./Table"
 import ComplaintForm from "./complaintForm"
 
 export default class UserDashboard extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      show: false,
+    }
+  }
+  handleClick = (e) => {
+    console.log(e.target.name)
+    if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show })
+    }
+    else if (e.target.name === "logout") {
+      localStorage.removeItem("token")
+    }
+  }
+ 
   render() {
     return (
       <div>
         <div id="dashboard">
           <h1 id="heading">Dashboard</h1>
-          <button id="logout" name="logout" onClick={this.props.handleClick}>Logout</button>
+          <button id="logout" name="logout" onClick={this.handleClick}>Logout</button>
         </div>
+
+        {localStorage.getItem('token')==='adminLoggedIn'?<button id="Add-a-Technican" name="form" onClick={this.props.handleClick}>Add a Technician</button>:''} 
+        {localStorage.getItem("token")!=='technicianLoggedIn'? <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>:''}
+        
         {/* upper right */}
-
-        {localStorage.getItem('token')!=='technicianLoggedIn'?
-        <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>:''}
-        <br></br>
+        <br></br><br/><br/>
         {/* Table - List of data*/}
-        <Table></Table>
-
+        <div style={{width:'100%',display:'inline'}}> 
+          <Table></Table>
+           
+      
+      
         {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
         {
-          this.props.show ? <ComplaintForm show={this.props.handleClick} /> : ""
+          this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
         }
+        </div>
 
       </div>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-
+import './Form.css'
 // time
 let formatAMPM = (date) => {
   let hours = date.getHours();
@@ -87,14 +87,15 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>ComplaintForm</h1>
-        <button onClick={this.props.show}>Close</button>
+      <div style={{width:'30%'}}className="complaint-form">
+        <h1 className="heading">Complaint-Form</h1>
+      <div className="container">
+        <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
 
         <form onSubmit={this.handleSubmit}>
 
           {/* Block */}
-          <label>Block : </label>&nbsp;
+          <label className="label">Block : </label>&nbsp;
           <select name="block"
             id="myList"
             onChange={this.handleChange}
@@ -108,7 +109,7 @@ class ComplaintForm extends Component {
           </select><br></br>
 
           {/* Floor */}
-          <label>Floor : </label>&nbsp;
+          <label className="label">Floor : </label>&nbsp;
           <select name="floor"
             onChange={this.handleChange}
             id="myList"
@@ -124,7 +125,7 @@ class ComplaintForm extends Component {
           </select><br></br>
 
           {/* System Number */}
-          <label>System Number : </label>
+          <label className="label">System Number : </label>
           <input name="systemNumber"
             type="number"
             onChange={this.handleChange}
@@ -135,13 +136,14 @@ class ComplaintForm extends Component {
 
 
           {/* Description */}
-          <label>Description :</label>
+          <label className="label">Description :</label>
           <textarea name="description"
             onChange={this.handleChange}
             value={this.state.description}
           ></textarea><br></br>
-          <button onClick={this.handleClick} type="submit">Submit</button>
+          <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
         </form>
+        </div>
       </div >
     )
   }
