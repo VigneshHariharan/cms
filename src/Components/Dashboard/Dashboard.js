@@ -13,6 +13,7 @@ class Dashboard extends Component {
          visible: false,
     }
   }
+
   handleClick =(e)=>{
   if (e.target.name === "form") {
       this.setState({ visible: !this.state.visible })
