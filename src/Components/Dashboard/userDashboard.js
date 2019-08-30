@@ -13,7 +13,9 @@ export default class UserDashboard extends Component {
           <button id="logout" name="logout" onClick={this.props.handleClick}>Logout</button>
         </div>
         {/* upper right */}
-        <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>
+
+        {localStorage.getItem('token')!=='technicianLoggedIn'?
+        <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>:''}
         <br></br>
         {/* Table - List of data*/}
         <Table></Table>

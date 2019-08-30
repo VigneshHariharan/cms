@@ -8,6 +8,9 @@ export default class TableHead extends Component {
       <th>Description</th>
       <th>Created Time</th>
       {localStorage.getItem("token") === "adminLoggedIn" ?
-        <th>Assign Function</th> : <th></th>}</tr>)
+
+        <th>Assign Function</th> : <th></th>}
+      {localStorage.getItem("token") === "technicianLoggedIn"?
+        <th>Status</th> : <th></th>}</tr>)
   }
 }
