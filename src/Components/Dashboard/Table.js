@@ -22,7 +22,8 @@ class Table extends Component {
               :
               complaints ? complaints.map((state, index) => {
                 return (this.props.technicianUsername === state.technician ?
-                  <TableData state={state} index={index} key={((index + 1) * 9000).toString()}></TableData> : <tr key={((index + 1) * 8000).toString()}></tr>)
+                  <TableData state={state} index={index} key={((index + 1) * 9000).toString()}></TableData>
+                  : <tr key={((index + 1) * 8000).toString()}></tr>)
               }) : ""
             }
           </tbody>
