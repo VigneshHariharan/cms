@@ -24,7 +24,14 @@ class ComplaintForm extends Component {
       description: "",
       err: false
     }
+    // this.blockRef=React.createRef()
+    // this.floorRef=React.createRef()
+    this.systemRef=React.createRef()
+    this.descRef=React.createRef()
   }
+  // componentDidMount(){
+  //   this.blockRef.current.focus()
+  // }
 
   handleChange = (e) => {
     // System Number
@@ -63,6 +70,19 @@ class ComplaintForm extends Component {
         return this.setState({ floorNo: [1, 2, 3, 4] })
     }
   }
+  handleKeyPress=(e)=>{
+    if(e.key==='Enter' && e.target.name==='systemNumber'){
+      // if(e.target.name==='block'){
+      //   this.floorRef.current.focus()
+      // }
+      // else if(e.target.name==='floor'){
+      //   this.systemRef.current.focus()
+      // }
+      // if(e.target.name==='systemNumber'){
+        this.descRef.current.focus()
+      // }
+    }
+  }
 
   handleClick = () => {
     const { block, floor, systemNumber, description } = this.state
@@ -90,13 +110,11 @@ class ComplaintForm extends Component {
       <div style={{width:'30%'}}className="complaint-form">
         <h1 className="heading">Complaint-Form</h1>
       <div className="container">
-        <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
-
         <form onSubmit={this.handleSubmit}>
-
           {/* Block */}
           <label className="label">Block : </label>&nbsp;
-          <select name="block"
+          <select 
+            name="block"
             id="myList"
             onChange={this.handleChange}
           // value={this.state.block}
@@ -110,7 +128,8 @@ class ComplaintForm extends Component {
 
           {/* Floor */}
           <label className="label">Floor : </label>&nbsp;
-          <select name="floor"
+          <select
+            name="floor"
             onChange={this.handleChange}
             id="myList"
 
@@ -126,7 +145,10 @@ class ComplaintForm extends Component {
 
           {/* System Number */}
           <label className="label">System Number : </label>
-          <input name="systemNumber"
+          <input 
+           ref={this.systemRef}
+            onKeyPress={this.handleKeyPress}
+            name="systemNumber"
             type="number"
             onChange={this.handleChange}
             step={1}
@@ -137,12 +159,15 @@ class ComplaintForm extends Component {
 
           {/* Description */}
           <label className="label">Description :</label>
-          <textarea name="description"
+          <textarea
+           ref={this.descRef}
+            name="description"
             onChange={this.handleChange}
             value={this.state.description}
           ></textarea><br></br>
           <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
-        </form>
+        </form><br/>
+        <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
         </div>
       </div >
     )

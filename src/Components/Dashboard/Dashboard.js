@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
-import Form from './technicianForm/form'
 
 import "./dashboard.css"
 
@@ -26,21 +25,19 @@ class Dashboard extends Component {
       case "loggedIn":
         return (
           <div>
-            <UserDashboard handleClick={this.handleClick}/>
-             <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>
+            <UserDashboard visible={this.state.visible} handleClick={this.handleClick}/>
           </div>
         )
       case "adminLoggedIn":
         return (
         <div>
-                        <UserDashboard handleClick={this.handleClick}/>
-          {this.state.visible ? <Form /> : ''}
+          <UserDashboard visible={this.state.visible} handleClick={this.handleClick}/>
         </div>
         )
       case "technicianLoggedIn":
         return (<div>
           <h1>Technician</h1>
-          <UserDashboard handleClick={this.handleClick}/>
+          <UserDashboard visible={this.state.visible} handleClick={this.handleClick}/>
         </div>
         )
 
