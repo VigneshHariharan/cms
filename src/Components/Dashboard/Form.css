@@ -34,18 +34,13 @@ form{
 textarea,input[name=systemNumber],select{
     margin-top: 10px;
 }
-input[type=text] {
+.technician-form {
     padding: 5px;
     margin: 8px 0;
     box-sizing: border-box;
     float: left; width: 240px;
   }
-  input[type=password] {
-    padding: 5px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    float: left; width: 240px;
-  }
+ 
   .asterick{
       color:red;
   }

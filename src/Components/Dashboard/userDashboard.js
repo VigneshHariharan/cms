@@ -62,7 +62,7 @@ class UserDashboard extends Component {
           this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
         }
           {this.props.visible ? <Form className="form"/> : ''}
-        </div>
+        </div></div>
       )
     else {
       return <Redirect to="" />

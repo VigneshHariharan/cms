@@ -71,17 +71,17 @@ class Form extends Component {
                     <h1 className="heading">Technician Details</h1>
             <div className="container">
                     <label className="label">First Name<span className="asterick">*</span></label>
-                <input ref={this.firstnameRef}type="text" name="firstName" required value={this.state.firstName} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/>
+                <input className="technician-form"ref={this.firstnameRef}type="text" name="firstName" required value={this.state.firstName} onChange={this.handleChange} onKeyPress={this.handleKeyPress}/>
                     <br />
                   <label className="label"> Last Name<span className="asterick">*</span></label>
-                <input ref={this.lastnameRef} type="text" name="lastName" required value={this.state.lastName} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+                <input className="technician-form" ref={this.lastnameRef} type="text" name="lastName" required value={this.state.lastName} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
                     {/* <input type="text" name="userName" value={`${this.state.firstName} ${this.state.lastName}`} onChange={this.handleChange}/> */}
                     <br />
                     <label className="label"> Password<span className="asterick">*</span></label>
-                <input ref={this.passwordRef}type="password" name="password" required value={this.state.password} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+                <input className="technician-form"  ref={this.passwordRef}type="password" name="password" required value={this.state.password} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
                     <br />
                     <label className="label"> Confirm Password <span className="asterick">*</span></label>
-                <input ref={this.cpasswordRef}type="password" name="cPassword" required value={this.state.cPassword} onChange={this.handleChange}  />
+                <input className="technician-form" ref={this.cpasswordRef}type="password" name="cPassword" required value={this.state.cPassword} onChange={this.handleChange}  />
                     <br />
                    <button className="submit" type="submit" onClick={this.handleClick}>submit</button>
           </div>
