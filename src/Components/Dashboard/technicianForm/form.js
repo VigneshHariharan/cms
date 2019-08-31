@@ -38,20 +38,20 @@ class Form extends Component {
 
     render() {
         return (
-            <div>
+            <div className="technicianform">
                 <form onSubmit={this.handleSumbit}>
                     <label>First Name:</label>
-                <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} />
+                    <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} />
                     <br />
-                  <label>  Last Name:</label>
-                <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} />
+                    <label>  Last Name:</label>
+                    <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} />
                     {/* <input type="text" name="userName" value={`${this.state.firstName} ${this.state.lastName}`} onChange={this.handleChange}/> */}
                     <br />
                     <label> Password:</label>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                     <br />
                     <label> Confirm password:</label>
-                <input type="password" name="cPassword" value={this.state.cPassword} onChange={this.handleChange} />
+                    <input type="password" name="cPassword" value={this.state.cPassword} onChange={this.handleChange} />
                     <br />
                     <button type="submit" onClick={this.handleClick}>submit</button>
                 </form>

@@ -6,7 +6,7 @@ const complaintInitialState = {
     systemNumber: 0,
     description: "",
     technician: '',
-    completeStatus:'In progress'
+    completeStatus: 'In progress'
   },
   //complaints not working
   complaints: localStorage.getItem("complaints"),
@@ -29,10 +29,15 @@ export const complaintReducer = (state = complaintInitialState, action) => {
       return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
 
     case 'COMPLETED_STATUS':
-        state.complaints[action.payload.index].completeStatus = 'Completed'
-        localStorage.setItem('complaints', JSON.stringify(state.complaints))
-        return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
-     
+      state.complaints[action.payload.index].completeStatus = 'Completed'
+      localStorage.setItem('complaints', JSON.stringify(state.complaints))
+      return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
+
+    case "LOGOUT":
+      localStorage.removeItem("username")
+      localStorage.removeItem("password")
+      localStorage.removeItem("token")
+      return { ...state }
 
     default:
       if (!localStorage.getItem("complaints")) {

@@ -48,7 +48,8 @@ class ComplaintForm extends Component {
       this.setState({ floorView: false })
     }
   }
-  // comme
+
+
   floorMap = (blockValue) => {
     switch (blockValue) {
       // case "block-1":
@@ -87,62 +88,62 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div style={{width:'30%'}}className="complaint-form">
+      <div style={{ width: '30%' }} className="complaint-form">
         <h1 className="heading">Complaint-Form</h1>
-      <div className="container">
-        <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
+        <div className="container">
+          <button className="closeButton" name="complaintform" onClick={this.props.show}>Close</button>
 
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
 
-          {/* Block */}
-          <label className="label">Block : </label>&nbsp;
+            {/* Block */}
+            <label className="label">Block : </label>&nbsp;
           <select name="block"
-            id="myList"
-            onChange={this.handleChange}
-          // value={this.state.block}
-          >
-            {/* <option></option> */}
-            <option>block-1</option>
-            <option>block-2</option>
-            <option>block-3</option>
-            <option>block-4</option>
-          </select><br></br>
+              id="myList"
+              onChange={this.handleChange}
+            // value={this.state.block}
+            >
+              {/* <option></option> */}
+              <option>block-1</option>
+              <option>block-2</option>
+              <option>block-3</option>
+              <option>block-4</option>
+            </select><br></br>
 
-          {/* Floor */}
-          <label className="label">Floor : </label>&nbsp;
+            {/* Floor */}
+            <label className="label">Floor : </label>&nbsp;
           <select name="floor"
-            onChange={this.handleChange}
-            id="myList"
+              onChange={this.handleChange}
+              id="myList"
 
-          // value={this.state.floor}
-          >
-            {/* <option></option> */}
-            {
-              this.state.floorNo ? this.state.floorNo.map((i) => {
-                return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
-              }) : ""
-            }
-          </select><br></br>
+            // value={this.state.floor}
+            >
+              {/* <option></option> */}
+              {
+                this.state.floorNo ? this.state.floorNo.map((i) => {
+                  return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
+                }) : ""
+              }
+            </select><br></br>
 
-          {/* System Number */}
-          <label className="label">System Number : </label>
-          <input name="systemNumber"
-            type="number"
-            onChange={this.handleChange}
-            step={1}
-            value={this.state.systemNumber}
-          ></input><br></br>
-          {this.state.err ? <p>Enter a number</p> : ""}
+            {/* System Number */}
+            <label className="label">System Number : </label>
+            <input name="systemNumber"
+              type="number"
+              onChange={this.handleChange}
+              step={1}
+              value={this.state.systemNumber}
+            ></input><br></br>
+            {this.state.err ? <p>Enter a number</p> : ""}
 
 
-          {/* Description */}
-          <label className="label">Description :</label>
-          <textarea name="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          ></textarea><br></br>
-          <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
-        </form>
+            {/* Description */}
+            <label className="label">Description :</label>
+            <textarea name="description"
+              onChange={this.handleChange}
+              value={this.state.description}
+            ></textarea><br></br>
+            <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
+          </form>
         </div>
       </div >
     )
@@ -153,7 +154,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setForm: (block, floor, systemNumber, description) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()),technician:''
+        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }
