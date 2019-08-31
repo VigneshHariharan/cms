@@ -65,6 +65,7 @@ class Form extends Component {
 
     render() {
         return (
+
             <div className="complaint-form" style={{width:'30%',display:'inline'}}>
                 <form className="form" onSubmit={this.handleSumbit}>
                     <h1 className="heading">Technician Details</h1>

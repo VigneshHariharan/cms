@@ -55,7 +55,8 @@ class ComplaintForm extends Component {
       this.setState({ floorView: false })
     }
   }
-  // comme
+
+
   floorMap = (blockValue) => {
     switch (blockValue) {
       // case "block-1":
@@ -107,7 +108,7 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div style={{width:'30%'}}className="complaint-form">
+      <div style={{ width: '30%' }} className="complaint-form">
         <h1 className="heading">Complaint-Form</h1>
       <div className="container">
         <form onSubmit={this.handleSubmit}>
@@ -168,6 +169,7 @@ class ComplaintForm extends Component {
           <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
         </form><br/>
         <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
+
         </div>
       </div >
     )
@@ -178,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setForm: (block, floor, systemNumber, description) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()),technician:''
+        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }
