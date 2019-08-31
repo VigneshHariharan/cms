@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 
 import Table from "./Table"
 import ComplaintForm from "./complaintForm"
+
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
+
+import Form from './technicianForm/form'
+
+
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -52,11 +57,11 @@ class UserDashboard extends Component {
             {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
-            {
-              this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
-            }
-          </div>
 
+        {
+          this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
+        }
+          {this.props.visible ? <Form className="form"/> : ''}
         </div>
       )
     else {

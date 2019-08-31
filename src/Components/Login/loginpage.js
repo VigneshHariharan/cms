@@ -21,11 +21,13 @@ class LoginPage extends Component {
     this.passwordRef = React.createRef();
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    if(!localStorage.getItem('token')){
     this.userRef.current.focus();
+    }
     // console.log(this.myRef)
   }
-
+ 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
     // console.log(e.target.value)
