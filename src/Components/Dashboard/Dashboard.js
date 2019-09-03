@@ -13,13 +13,17 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       visible: false,
+      show: false,
     }
   }
 
 
   handleClick = (e) => {
     if (e.target.name === "form") {
-      this.setState({ visible: !this.state.visible })
+      this.setState({ visible: !this.state.visible,show:false })
+    }
+    else if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show,visible:false })
     }
 
   }
@@ -27,24 +31,23 @@ class Dashboard extends Component {
 
   render() {
     const token = this.props.token
-    console.log(token, "userlogin")
     if (token === "loggedIn") {
       return (
         <div>
-          <UserDashboard handleClick={this.handleClick} />
+          <UserDashboard handleClick={this.handleClick} show={this.state.show} />
         </div>
       )
     }
     else if (localStorage.getItem("token") === "adminLoggedIn")
       return (
         <div>
-          <UserDashboard handleClick={this.handleClick} />
+          <UserDashboard handleClick={this.handleClick} show={this.state.show}/>
           {this.state.visible ? <Form className="technicianform" /> : ''}
         </div>
       )
     else if (localStorage.getItem("token") === 'technicianLoggedIn')
       return (<div>
-        <UserDashboard handleClick={this.handleClick} />
+        <UserDashboard handleClick={this.handleClick} show={this.state.show}/>
       </div>
       )
     else

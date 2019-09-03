@@ -27,7 +27,7 @@ body {
 /* --------------buttons------------ */
 
 
-button{
+button:not(.completeStatusButton){
     font-family: 'Lato', sans-serif;
     font-size: 16px;
     background: white;
@@ -39,11 +39,13 @@ button{
     box-shadow: 1px 1px 2px 2px rgba(32, 32, 32, 0.75);
 }
 
-button:hover{
+button:not(.completeStatusButton):hover{
     background: black;
     color:white;
     box-shadow: 1px 1px 1px 1px rgba(50,50,50 0.75);
 }
+.completeStatusButton{
+    }
 
 #logout{
     display: inline-block;

@@ -6,32 +6,22 @@ import ComplaintForm from "./complaintForm"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
-import Form from './technicianForm/form'
-
 
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: false,
-      token: localStorage.getItem("token") ? localStorage.getItem("token") : ""
+     
+      token: localStorage.getItem("token") ? localStorage.getItem("token") : "",
+
     }
   }
 
-  componentDidMount() {
-    console.log("component mounts")
-  }
-
-  componentWillUnmount() {
-    console.log("component unmounted")
-  }
 
   handleClick = (e) => {
-    if (e.target.name === "complaintform") {
-      this.setState({ show: !this.state.show })
-    }
-    else if (e.target.name === "logout") {
+  
+     if (e.target.name === "logout") {
       this.props.logout()
       this.setState({ token: localStorage.getItem("token") })
     }
@@ -40,29 +30,26 @@ class UserDashboard extends Component {
   render() {
     if (this.state.token)
       return (
-        <div>
+        <div style={{ width: '100%', display: 'inline' }}>
           <div id="dashboard">
             <h1 id="heading">Dashboard</h1>
             <button id="logout" name="logout" onClick={this.handleClick}>Logout</button>
           </div>
 
           {localStorage.getItem('token') === 'adminLoggedIn' ? <button id="Add-a-Technican" name="form" onClick={this.props.handleClick}>Add a Technician</button> : ''}
-          {localStorage.getItem("token") !== 'technicianLoggedIn' ? <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button> : ''}
+          {localStorage.getItem("token") !== 'technicianLoggedIn' ? <button id="Add-a-Complaint" name="complaintform" onClick={this.props.handleClick}>Add a Complaint</button> : ''}
 
           {/* upper right */}
           <br></br><br /><br />
           {/* Table - List of data*/}
-          <div style={{ width: '100%', display: 'inline' }}>
             <Table></Table>
+        {
+          this.props.show ? <ComplaintForm show={this.handleClick} /> : ""
+        }
             {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
-
-        {
-          this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
-        }
-          {this.props.visible ? <Form className="form"/> : ''}
-        </div></div>
+         </div>
       )
     else {
       return <Redirect to="" />

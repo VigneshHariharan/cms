@@ -15,7 +15,7 @@ class TableData extends Component {
     const technicians = localStorage.getItem("technicians") ? this.props.technicians : []
     const state = this.props.state
     const completeStatus = JSON.parse(localStorage.getItem('complaints'))[this.props.index].completeStatus === 'Completed'
-    return (<tr><td className="block">{state.block}</td>
+   return (<tr><td className="block">{state.block}</td>
       <td>{state.floor}</td>
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
@@ -32,7 +32,7 @@ class TableData extends Component {
           <button onClick={() => this.props.assignTechnician(this.state.selectedOption, this.props.index)}>Assign</button></td> : <td className="hidden"></td>}
       {
         localStorage.getItem("token") === "technicianLoggedIn" ?
-          <td className="status"><button disabled={completeStatus} onClick={() => this.props.isCompleted(this.props.index)}>Completed</button>
+          <td className="status"><button className="completeStatusButton" disabled={completeStatus} onClick={() => this.props.isCompleted(this.props.index)}>Completed</button>
             {completeStatus ? "Completed" : "in-progess"}</td> : <td className="hidden"></td>
       }</tr>)
   }
