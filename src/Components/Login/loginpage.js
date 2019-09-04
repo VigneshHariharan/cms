@@ -102,7 +102,6 @@ class LoginPage extends Component {
 
   render() {
     const loggedIn = this.props.loggedIn
-    console.log(loggedIn)
     if (!loggedIn) {
       return (
         <div className="formDiv">
@@ -142,7 +141,6 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     users: state.login.users,
     admin: state.login.admin,

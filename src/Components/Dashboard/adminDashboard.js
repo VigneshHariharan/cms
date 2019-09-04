@@ -4,6 +4,7 @@ import UserDashboard from "./userDashboard"
 import { Redirect } from "react-router-dom"
 import "./dashboard.css"
 import { connect } from "react-redux"
+import Table from "./Tables/adminTable/Table"
 
 
 class AdminDashboard extends Component {
@@ -34,6 +35,7 @@ class AdminDashboard extends Component {
           <Form className="technicianform" />
           <button id="Add-a-Technican" name="form" onClick={this.props.handleClick}>Add a Technician</button>
           <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+          <Table ></Table>
         </div>
       )
     else

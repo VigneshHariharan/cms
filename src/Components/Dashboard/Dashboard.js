@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
-
+import Table from "./Tables/Table"
 import { connect } from "react-redux"
 import "./dashboard.css"
 
@@ -27,8 +27,9 @@ class Dashboard extends Component {
       return (
         <div>
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
-
+          <Table></Table>
+          <button id="Add-a-Complaint" name="complaintform"
+            onClick={this.handleClick}>Add a Complaint</button>
         </div>
       )
     }

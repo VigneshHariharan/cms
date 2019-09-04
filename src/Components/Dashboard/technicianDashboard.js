@@ -3,7 +3,7 @@ import UserDashboard from "./userDashboard"
 import { Redirect } from "react-router-dom"
 import "./dashboard.css"
 import { connect } from "react-redux"
-
+import Table from "./Tables/technicianTable/Table"
 
 class TechnicianDashboard extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class TechnicianDashboard extends Component {
     if (this.state.token)
       return (<div>
         <UserDashboard handleClick={this.handleClick} token={this.state.token} />
+        <Table></Table>
       </div>
       )
     else
