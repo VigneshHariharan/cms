@@ -31,8 +31,7 @@ class Form extends Component {
 
     }
     handleKeyPress = (e) => {
-        console.log(e.key, "key")
-        console.log(e.target.name)
+
         if (e.key === 'Enter') {
             if (e.target.name === 'firstName') {
                 this.lastnameRef.current.focus()
