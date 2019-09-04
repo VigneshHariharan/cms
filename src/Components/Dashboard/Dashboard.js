@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
 import Table from "./Tables/Table"
+import ComplaintForm from "./complaintForm"
 import { connect } from "react-redux"
 import "./dashboard.css"
+
 
 
 class Dashboard extends Component {
@@ -11,7 +13,8 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      token: localStorage.getItem("userToken") ? localStorage.getItem("userToken") : ""
+      token: localStorage.getItem("userToken") ? localStorage.getItem("userToken") : "",
+      show: false
     }
   }
 
@@ -20,6 +23,9 @@ class Dashboard extends Component {
       this.props.logout()
       this.setState({ token: localStorage.getItem("userToken") })
     }
+    else if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show })
+    }
   }
 
   render() {
@@ -27,9 +33,19 @@ class Dashboard extends Component {
       return (
         <div>
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <Table></Table>
-          <button id="Add-a-Complaint" name="complaintform"
-            onClick={this.handleClick}>Add a Complaint</button>
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+          <br /><br /><br />
+          <div style={{ width: '100%', display: 'inline' }}>
+            <Table></Table>
+
+            {/* Complaint form only shows when "add a complaint" button is pressed
+            ..................and add complaints to the table file.
+         */}
+
+            {
+              this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
+            }
+          </div>
         </div>
       )
     }

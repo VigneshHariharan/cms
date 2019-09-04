@@ -46,7 +46,6 @@ button:hover{
 }
 
 #logout{
-    display: inline-block;
     border-color: aliceblue;    
     /* margin-left : 75%; */
     float: right;

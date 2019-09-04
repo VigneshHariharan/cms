@@ -25,12 +25,14 @@ form{
     margin:10px;
 }
 .submit{
-    margin:10px ;
-    float: right;
+    margin:10px;
+    float: left;
 }
 .closeButton{
+    margin:10px;
     float: right;
 }
+
 textarea,input[name=systemNumber],select{
     margin-top: 10px;
 }

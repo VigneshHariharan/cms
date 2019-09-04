@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import './Form.css'
+
+import 'font-awesome/css/font-awesome.min.css';
 // time
 let formatAMPM = (date) => {
   let hours = date.getHours();
@@ -26,8 +28,8 @@ class ComplaintForm extends Component {
     }
     // this.blockRef=React.createRef()
     // this.floorRef=React.createRef()
-    this.systemRef=React.createRef()
-    this.descRef=React.createRef()
+    this.systemRef = React.createRef()
+    this.descRef = React.createRef()
   }
   // componentDidMount(){
   //   this.blockRef.current.focus()
@@ -71,8 +73,8 @@ class ComplaintForm extends Component {
         return this.setState({ floorNo: [1, 2, 3, 4] })
     }
   }
-  handleKeyPress=(e)=>{
-    if(e.key==='Enter' && e.target.name==='systemNumber'){
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter' && e.target.name === 'systemNumber') {
       // if(e.target.name==='block'){
       //   this.floorRef.current.focus()
       // }
@@ -80,7 +82,7 @@ class ComplaintForm extends Component {
       //   this.systemRef.current.focus()
       // }
       // if(e.target.name==='systemNumber'){
-        this.descRef.current.focus()
+      this.descRef.current.focus()
       // }
     }
   }
@@ -109,69 +111,70 @@ class ComplaintForm extends Component {
   render() {
     return (
       <div style={{ width: '30%' }} className="complaint-form">
+        {/* <span onClick={this.props.show} class="closeButton">&times;</span> */}
+        <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
+        {/* <i onClick={this.props.show}class="fa">&#xf00d;</i> */}
         <h1 className="heading">Complaint-Form</h1>
-      <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          {/* Block */}
-          <label className="label">Block : </label>&nbsp;
-          <select 
-            name="block"
-            id="myList"
-            onChange={this.handleChange}
-          // value={this.state.block}
-          >
-            {/* <option></option> */}
-            <option>block-1</option>
-            <option>block-2</option>
-            <option>block-3</option>
-            <option>block-4</option>
-          </select><br></br>
-
-          {/* Floor */}
-          <label className="label">Floor : </label>&nbsp;
+        <div className="container">
+          <form onSubmit={this.handleSubmit}>
+            {/* Block */}
+            <label className="label">Block : </label>&nbsp;
           <select
-            name="floor"
-            onChange={this.handleChange}
-            id="myList"
+              name="block"
+              id="myList"
+              onChange={this.handleChange}
+            // value={this.state.block}
+            >
+              {/* <option></option> */}
+              <option>block-1</option>
+              <option>block-2</option>
+              <option>block-3</option>
+              <option>block-4</option>
+            </select><br></br>
 
-          // value={this.state.floor}
-          >
-            {/* <option></option> */}
-            {
-              this.state.floorNo ? this.state.floorNo.map((i) => {
-                return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
-              }) : ""
-            }
-          </select><br></br>
+            {/* Floor */}
+            <label className="label">Floor : </label>&nbsp;
+          <select
+              name="floor"
+              onChange={this.handleChange}
+              id="myList"
 
-          {/* System Number */}
-          <label className="label">System Number : </label>
-          <input 
-           ref={this.systemRef}
-            onKeyPress={this.handleKeyPress}
-            name="systemNumber"
-            type="number"
-            onChange={this.handleChange}
-            step={1}
-            value={this.state.systemNumber}
-          ></input><br></br>
-          {this.state.err ? <p>Enter a number</p> : ""}
+            // value={this.state.floor}
+            >
+              {/* <option></option> */}
+              {
+                this.state.floorNo ? this.state.floorNo.map((i) => {
+                  return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
+                }) : ""
+              }
+            </select><br></br>
+
+            {/* System Number */}
+            <label className="label">System Number : </label>
+            <input
+              ref={this.systemRef}
+              onKeyPress={this.handleKeyPress}
+              name="systemNumber"
+              type="number"
+              onChange={this.handleChange}
+              step={1}
+              value={this.state.systemNumber}
+            ></input><br></br>
+            {this.state.err ? <p>Enter a number</p> : ""}
 
 
-          {/* Description */}
-          <label className="label">Description :</label>
-          <textarea
-           ref={this.descRef}
-            name="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          ></textarea><br></br>
-          <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
-        </form><br/>
-        <button className="closeButton" name = "complaintform" onClick={this.props.show}>Close</button>
-
+            {/* Description */}
+            <label className="label">Description :</label>
+            <textarea
+              ref={this.descRef}
+              name="description"
+              onChange={this.handleChange}
+              value={this.state.description}
+            ></textarea><br></br>
+            <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
+          </form>
         </div>
-      </div >
+      </div>
     )
   }
 }
