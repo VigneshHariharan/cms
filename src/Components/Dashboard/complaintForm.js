@@ -110,13 +110,10 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div style={{ width: '30%' }} className="complaint-form">
-        {/* <span onClick={this.props.show} class="closeButton">&times;</span> */}
-        <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
-        {/* <i onClick={this.props.show}class="fa">&#xf00d;</i> */}
+          <div>
+          <form  style={{ width: '30%',display:'inline' }}  className="container complaint-form"  onSubmit={this.handleSubmit}>
+          <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
         <h1 className="heading">Complaint-Form</h1>
-        <div className="container">
-          <form onSubmit={this.handleSubmit}>
             {/* Block */}
             <label className="label">Block : </label>&nbsp;
           <select
@@ -173,8 +170,7 @@ class ComplaintForm extends Component {
             ></textarea><br></br>
             <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
           </form>
-        </div>
-      </div>
+          </div>
     )
   }
 }

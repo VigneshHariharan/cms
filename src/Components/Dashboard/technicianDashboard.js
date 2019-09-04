@@ -26,6 +26,7 @@ class TechnicianDashboard extends Component {
     if (this.state.token)
       return (<div>
         <UserDashboard handleClick={this.handleClick} token={this.state.token} />
+        <br/>
         <Table></Table>
       </div>
       )
