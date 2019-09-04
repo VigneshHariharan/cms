@@ -61,20 +61,18 @@ button:hover{
     color : #0086C3;
 }
 
+
 #Add-a-Complaint,#Add-a-Technican{
+    float: right;
     background-color :#f44336;
     color : white;
     box-shadow:1px 1px black;
-    float : right;
-    margin-top : 50px;
-    margin-right: 100px;
     padding : 7px 20px;
     border : none;
+    margin:10px;
 }
 #Add-a-Technican{
     background-color: #673ab7;
-    margin-top : -188px;
-    margin-right: 280px;
 }
 #Add-a-Complaint:hover{
     background-color : white;
@@ -86,5 +84,3 @@ button:hover{
     background: white;
     color :#673ab7;
 }
-
-/* Table */

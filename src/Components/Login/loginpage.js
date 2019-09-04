@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
+
 class LoginPage extends Component {
   constructor(props) {
     super(props)
@@ -17,12 +18,14 @@ class LoginPage extends Component {
       error: '',
       wrongFormat: '',
     }
-    this.userRef=React.createRef();
-    this.passwordRef=React.createRef();
+    this.userRef = React.createRef();
+    this.passwordRef = React.createRef();
   }
 
-  componentDidMount(){
-    this.userRef.current.focus();
+  componentDidMount() {
+    if (!localStorage.getItem('token')) {
+      this.userRef.current.focus();
+    }
     // console.log(this.myRef)
   }
 
@@ -33,11 +36,11 @@ class LoginPage extends Component {
     //   this.passwordRef.current.focus()
     // }
   }
-  handleKeyPress=(e)=>{
+  handleKeyPress = (e) => {
     // console.log(this.state.error)
-    if(e.key==='Enter'){
+    if (e.key === 'Enter') {
       this.passwordRef.current.focus();
-      console.log(this.state.error,'enter')
+      console.log(this.state.error, 'enter')
     }
 
   }
@@ -98,47 +101,53 @@ class LoginPage extends Component {
   }
 
   render() {
-    const token = localStorage.getItem("token")
-    if (!token) {
+    const loggedIn = this.props.loggedIn
+    console.log(loggedIn)
+    if (!loggedIn) {
       return (
-        <div  className="formDiv">
+        <div className="formDiv">
           <form className="form" onSubmit={this.handleSubmit}>
             <p className="login">LOG IN</p>
             <div className="textboxDiv">
-             <i  className="fa fa-user icon" aria-hidden="true"></i>
-             <input ref={this.userRef} placeholder="Username" className="textbox"name="username" type="text" onKeyPress={this.handleKeyPress} onChange={this.handleChange}></input>
-             </div>
+              <i className="fa fa-user icon" aria-hidden="true"></i>
+              <input ref={this.userRef} placeholder="Username" className="textbox" name="username" type="text" onKeyPress={this.handleKeyPress} onChange={this.handleChange}></input>
+            </div>
 
             <div className="textboxDiv textboxDiv1">
-               <i className="fa fa-lock icon"></i>
-               <input ref={this.passwordRef} placeholder="Password" className="textbox" name="password" type="password" onChange={this.handleChange}></input>
-           </div> <br/>
+              <i className="fa fa-lock icon"></i>
+              <input ref={this.passwordRef} placeholder="Password" className="textbox" name="password" type="password" onChange={this.handleChange}></input>
+            </div> <br />
 
-          {
-            this.state.error?<i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p  className="errorMsg">{this.state.error}</p></i>:''
-          }
-          {
-           this.state.wrongFormat?<i  className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p className="errorMsg">{this.state.wrongFormat}</p></i>:''
-          }
-          <div className="textboxDiv1"><button className="button" type="submit" onClick={this.handleClick}>Login</button></div>
+            {
+              this.state.error ? <i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p className="errorMsg">{this.state.error}</p></i> : ''
+            }
+            {
+              this.state.wrongFormat ? <i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p className="errorMsg">{this.state.wrongFormat}</p></i> : ''
+            }
+            <div className="textboxDiv1"><button className="button" onClick={this.handleClick} type="submit">Login</button></div>
           </form>
         </div>
       )
     }
-    else {
+    else if (loggedIn === "user") {
       return <Redirect to="/dashboard"></Redirect>
     }
-
-
+    else if (loggedIn === "admin") {
+      return <Redirect to="/admindashboard"></Redirect>
+    }
+    else if (loggedIn === "technician") {
+      return <Redirect to="/techniciandashboard"></Redirect>
+    }
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    token: state.login.token,
     users: state.login.users,
     admin: state.login.admin,
-    technicians: state.login.technicians
+    technicians: state.login.technicians,
+    loggedIn: state.login.loggedIn
   }
 }
 

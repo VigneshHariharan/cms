@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import TableData from "./tableData"
 import TableHead from "./tableHead"
+import "./table.css"
 
 class Table extends Component {
 
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     return (
-      <div>
-        <table>
+
+        <table id="table" style={{width:'60%',display:'inline'}}>
           <thead>
             <TableHead></TableHead>
           </thead>
@@ -28,7 +29,7 @@ class Table extends Component {
             }
           </tbody>
         </table>
-      </div>
+      
     )
   }
 }

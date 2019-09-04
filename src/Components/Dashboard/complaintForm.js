@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-
+import './Form.css'
+import 'font-awesome/css/font-awesome.min.css';
 // time
 let formatAMPM = (date) => {
   let hours = date.getHours();
@@ -24,7 +25,14 @@ class ComplaintForm extends Component {
       description: "",
       err: false
     }
+    // this.blockRef=React.createRef()
+    // this.floorRef=React.createRef()
+    this.systemRef=React.createRef()
+    this.descRef=React.createRef()
   }
+  // componentDidMount(){
+  //   this.blockRef.current.focus()
+  // }
 
   handleChange = (e) => {
     // System Number
@@ -48,7 +56,8 @@ class ComplaintForm extends Component {
       this.setState({ floorView: false })
     }
   }
-  // comme
+
+
   floorMap = (blockValue) => {
     switch (blockValue) {
       // case "block-1":
@@ -61,6 +70,19 @@ class ComplaintForm extends Component {
         return this.setState({ floorNo: [1, 2, 3, 4, 5, 6, 7] })
       default:
         return this.setState({ floorNo: [1, 2, 3, 4] })
+    }
+  }
+  handleKeyPress=(e)=>{
+    if(e.key==='Enter' && e.target.name==='systemNumber'){
+      // if(e.target.name==='block'){
+      //   this.floorRef.current.focus()
+      // }
+      // else if(e.target.name==='floor'){
+      //   this.systemRef.current.focus()
+      // }
+      // if(e.target.name==='systemNumber'){
+        this.descRef.current.focus()
+      // }
     }
   }
 
@@ -87,15 +109,17 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>ComplaintForm</h1>
-        <button onClick={this.props.show}>Close</button>
-
+      <div style={{ width: '30%' }} className="complaint-form">
+        {/* <span onClick={this.props.show} class="closeButton">&times;</span> */}
+      <button className="closeButton" name = "complaintform" onClick={this.props.show}>&times;</button>
+      {/* <i onClick={this.props.show}class="fa">&#xf00d;</i> */}
+        <h1 className="heading">Complaint-Form</h1>
+      <div className="container">
         <form onSubmit={this.handleSubmit}>
-
           {/* Block */}
-          <label>Block : </label>&nbsp;
-          <select name="block"
+          <label className="label">Block : </label>&nbsp;
+          <select 
+            name="block"
             id="myList"
             onChange={this.handleChange}
           // value={this.state.block}
@@ -108,8 +132,9 @@ class ComplaintForm extends Component {
           </select><br></br>
 
           {/* Floor */}
-          <label>Floor : </label>&nbsp;
-          <select name="floor"
+          <label className="label">Floor : </label>&nbsp;
+          <select
+            name="floor"
             onChange={this.handleChange}
             id="myList"
 
@@ -124,8 +149,11 @@ class ComplaintForm extends Component {
           </select><br></br>
 
           {/* System Number */}
-          <label>System Number : </label>
-          <input name="systemNumber"
+          <label className="label">System Number : </label>
+          <input 
+           ref={this.systemRef}
+            onKeyPress={this.handleKeyPress}
+            name="systemNumber"
             type="number"
             onChange={this.handleChange}
             step={1}
@@ -135,13 +163,16 @@ class ComplaintForm extends Component {
 
 
           {/* Description */}
-          <label>Description :</label>
-          <textarea name="description"
+          <label className="label">Description :</label>
+          <textarea
+           ref={this.descRef}
+            name="description"
             onChange={this.handleChange}
             value={this.state.description}
           ></textarea><br></br>
-          <button onClick={this.handleClick} type="submit">Submit</button>
+          <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
         </form>
+        </div>
       </div >
     )
   }
@@ -151,7 +182,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setForm: (block, floor, systemNumber, description) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()),technician:''
+        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }

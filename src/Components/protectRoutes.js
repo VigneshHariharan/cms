@@ -5,6 +5,7 @@ class ProtectRoutes extends React.Component {
   render() {
     if (localStorage.getItem("token")) {
       //....................................try render
+
       return <Route path={this.props.path} component={this.props.component} />
     }
     else {
