@@ -4,11 +4,9 @@ import { connect } from "react-redux"
 class TableData extends Component {
 
   render() {
-    console.log(this.props)
     const state = this.props.state
     const completeStatus = JSON.parse(localStorage.getItem('complaints'))[this.props.index].completeStatus === 'Completed'
     return (<tr>
-      {console.log(state, this.props)}
       <td className="block">{state.block}</td>
       <td>{state.floor}</td>
       <td>{state.systemNumber}</td>

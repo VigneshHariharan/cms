@@ -8,7 +8,6 @@ import { connect } from "react-redux"
 import ComplaintForm from "./complaintForm"
 import Table from "./Tables/adminTable/Table"
 
-
 class AdminDashboard extends Component {
   constructor(props) {
     super(props)
