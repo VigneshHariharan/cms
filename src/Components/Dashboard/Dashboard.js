@@ -2,61 +2,45 @@ import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
 
-import Form from './technicianForm/form'
 import { connect } from "react-redux"
-
 import "./dashboard.css"
 
 
 class Dashboard extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      visible: false,
+      token: localStorage.getItem("userToken") ? localStorage.getItem("userToken") : ""
     }
   }
-
 
   handleClick = (e) => {
-    if (e.target.name === "form") {
-      this.setState({ visible: !this.state.visible })
+    if (e.target.name === "logout") {
+      this.props.logout()
+      this.setState({ token: localStorage.getItem("userToken") })
     }
-
   }
 
-
   render() {
-    const token = this.props.token
-    console.log(token, "userlogin")
-    if (token === "loggedIn") {
+    if (this.state.token) {
       return (
         <div>
-          <UserDashboard handleClick={this.handleClick} />
+          <UserDashboard handleClick={this.handleClick} token={this.state.token} />
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+
         </div>
       )
     }
-    else if (localStorage.getItem("token") === "adminLoggedIn")
-      return (
-        <div>
-          <UserDashboard handleClick={this.handleClick} />
-          {this.state.visible ? <Form className="technicianform" /> : ''}
-        </div>
-      )
-    else if (localStorage.getItem("token") === 'technicianLoggedIn')
-      return (<div>
-        <UserDashboard handleClick={this.handleClick} />
-      </div>
-      )
     else
       return <Redirect to="/" ></Redirect>
   }
 
 }
-
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    token: state.login.token
+    logout: () => dispatch({ type: "USER_LOGOUT" })
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(null, mapDispatchToProps)(Dashboard)

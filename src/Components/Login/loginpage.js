@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
+
 class LoginPage extends Component {
   constructor(props) {
     super(props)
@@ -21,13 +22,13 @@ class LoginPage extends Component {
     this.passwordRef = React.createRef();
   }
 
-  componentDidMount(){
-    if(!localStorage.getItem('token')){
-    this.userRef.current.focus();
+  componentDidMount() {
+    if (!localStorage.getItem('token')) {
+      this.userRef.current.focus();
     }
     // console.log(this.myRef)
   }
- 
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
     // console.log(e.target.value)
@@ -100,8 +101,9 @@ class LoginPage extends Component {
   }
 
   render() {
-    const token = localStorage.getItem("token")
-    if (!token) {
+    const loggedIn = this.props.loggedIn
+    console.log(loggedIn)
+    if (!loggedIn) {
       return (
         <div className="formDiv">
           <form className="form" onSubmit={this.handleSubmit}>
@@ -127,20 +129,25 @@ class LoginPage extends Component {
         </div>
       )
     }
-    else {
+    else if (loggedIn === "user") {
       return <Redirect to="/dashboard"></Redirect>
     }
-
-
+    else if (loggedIn === "admin") {
+      return <Redirect to="/admindashboard"></Redirect>
+    }
+    else if (loggedIn === "technician") {
+      return <Redirect to="/techniciandashboard"></Redirect>
+    }
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    token: state.login.token,
     users: state.login.users,
     admin: state.login.admin,
-    technicians: state.login.technicians
+    technicians: state.login.technicians,
+    loggedIn: state.login.loggedIn
   }
 }
 

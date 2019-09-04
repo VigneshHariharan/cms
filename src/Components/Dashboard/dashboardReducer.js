@@ -33,11 +33,24 @@ export const complaintReducer = (state = complaintInitialState, action) => {
       localStorage.setItem('complaints', JSON.stringify(state.complaints))
       return { ...state, complaints: JSON.parse(localStorage.getItem("complaints")) }
 
-    case "LOGOUT":
-      localStorage.removeItem("username")
-      localStorage.removeItem("password")
-      localStorage.removeItem("token")
+    case "USER_LOGOUT":
+      localStorage.removeItem("usernameOfUser")
+      localStorage.removeItem("passwordOfUser")
+      localStorage.removeItem("userToken")
       return { ...state }
+    case "TECHNICIAN_LOGOUT":
+      localStorage.removeItem("usernameOfTechnician")
+      localStorage.removeItem("passwordOfTechnician")
+      localStorage.removeItem("technicianToken")
+      return { ...state }
+    case "ADMIN_LOGOUT":
+      localStorage.removeItem("usernameOfAdmin")
+      localStorage.removeItem("passwordOfAdmin")
+      localStorage.removeItem("adminToken")
+      return { ...state }
+
+
+
 
     default:
       if (!localStorage.getItem("complaints")) {
