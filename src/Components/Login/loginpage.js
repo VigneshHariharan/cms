@@ -22,7 +22,7 @@ class LoginPage extends Component {
   }
 
   componentDidMount(){
-    if(!localStorage.getItem('token')){
+    if(!localStorage.getItem('userToken')){
     this.userRef.current.focus();
     }
     // console.log(this.myRef)
@@ -100,7 +100,7 @@ class LoginPage extends Component {
   }
 
   render() {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("userToken")
     if (!token) {
       return (
         <div className="formDiv">
@@ -110,7 +110,6 @@ class LoginPage extends Component {
               <i className="fa fa-user icon" aria-hidden="true"></i>
               <input ref={this.userRef} placeholder="Username" className="textbox" name="username" type="text" onKeyPress={this.handleKeyPress} onChange={this.handleChange}></input>
             </div>
-
             <div className="textboxDiv textboxDiv1">
               <i className="fa fa-lock icon"></i>
               <input ref={this.passwordRef} placeholder="Password" className="textbox" name="password" type="password" onChange={this.handleChange}></input>

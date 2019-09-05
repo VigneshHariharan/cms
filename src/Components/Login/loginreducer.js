@@ -2,6 +2,7 @@
 const loginInitialState = {
   username: localStorage.getItem("username"),
   password: localStorage.getItem("password"),
+  userToken: localStorage.getItem('userToken') ? localStorage.getItem("userToken") : "",
   token: localStorage.getItem('token') ? localStorage.getItem("token") : "",
   users: [
     {
@@ -28,12 +29,12 @@ export const loginReducer = (state = loginInitialState, action) => {
     case "LOGIN":
       localStorage.setItem('username', action.payload.username)
       localStorage.setItem('password', action.payload.password)
-      localStorage.setItem("token", "loggedIn")
+      localStorage.setItem("userToken", "loggedIn")
       return {
         ...state,
         username: localStorage.getItem("username"),
         password: localStorage.getItem("password"),
-        token: localStorage.getItem("token")
+        token: localStorage.getItem("userToken")
       }
 
     case "ADMIN_LOGIN":

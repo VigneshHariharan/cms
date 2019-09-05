@@ -28,7 +28,7 @@ class Dashboard extends Component {
   render() {
     const token = this.props.token
     console.log(token, "userlogin")
-    if (token === "loggedIn") {
+    if (localStorage.getItem("userToken") === "loggedIn") {
       return (
         <div>
           <UserDashboard handleClick={this.handleClick} />

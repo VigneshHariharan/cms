@@ -15,16 +15,10 @@ class UserDashboard extends Component {
     super(props)
     this.state = {
       show: false,
-      token: localStorage.getItem("token") ? localStorage.getItem("token") : ""
+      token: localStorage.getItem("token") ? localStorage.getItem("token") : "",
+      userToken:localStorage.getItem("userToken") ? localStorage.getItem("userToken") : "",
     }
-  }
-
-  componentDidMount() {
-    console.log("component mounts")
-  }
-
-  componentWillUnmount() {
-    console.log("component unmounted")
+    console.log(this.state.userToken)
   }
 
   handleClick = (e) => {
@@ -33,12 +27,12 @@ class UserDashboard extends Component {
     }
     else if (e.target.name === "logout") {
       this.props.logout()
-      this.setState({ token: localStorage.getItem("token") })
+      this.setState({ userToken: localStorage.getItem("userToken") })
     }
   }
 
   render() {
-    if (this.state.token)
+    if (this.state.userToken)
       return (
         <div>
           <div id="dashboard">

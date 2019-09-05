@@ -36,7 +36,7 @@ export const complaintReducer = (state = complaintInitialState, action) => {
     case "LOGOUT":
       localStorage.removeItem("username")
       localStorage.removeItem("password")
-      localStorage.removeItem("token")
+      localStorage.removeItem("userToken")
       return { ...state }
 
     default:
