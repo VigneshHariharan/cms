@@ -8,19 +8,19 @@ class Table extends Component {
   render() {
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     return (
-        <table id="table" style={{width:'60%',display:'inline'}}>
-          <thead>
-            <TableHead></TableHead>
-          </thead>
-          <tbody>
-            { complaints ? complaints.map((state, index) => {
-                return <TableData state={state}
-                 index={index} key={(index * 10000).toString()} />
-              }) : ""
-            }
-          </tbody>
-        </table>
-      
+      <table id="table" style={{ width: '60%', display: 'inline' }}>
+        <thead>
+          <TableHead></TableHead>
+        </thead>
+        <tbody>
+          {complaints ? complaints.map((state, index) => {
+            return <TableData state={state}
+              index={index} key={(index * 10000).toString()} />
+          }) : ""
+          }
+        </tbody>
+      </table>
+
     )
   }
 }
