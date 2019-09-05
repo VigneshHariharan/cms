@@ -7,7 +7,6 @@ class TableData extends Component {
     this.state = {
       selectedOption: localStorage.getItem('technicians') ?
         JSON.parse(localStorage.getItem('technicians'))[0].username : '',
-      assign: localStorage.getItem("assign") ? true : "",
     }
   }
 
@@ -16,8 +15,6 @@ class TableData extends Component {
   }
 
   handleClick = () => {
-    localStorage.setItem("assign", true)
-    this.setState({ assign: localStorage.getItem("assign") })
     this.props.assignTechnician(this.state.selectedOption, this.props.index)
   }
 
@@ -29,7 +26,7 @@ class TableData extends Component {
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
       <td>{state.createdTime}</td>
-      <td><select disabled={this.state.assign} onChange={this.handleSelect}>
+      <td><select disabled={state.assignStatus ? true : ""} onChange={this.handleSelect}>
         {
           technicians.map((tech, i) => {
             return (
@@ -37,13 +34,13 @@ class TableData extends Component {
             )
           })
         }</select>
-        <button onClick={this.handleClick} disabled={this.state.assign}>Assign</button></td>
+        <button onClick={this.handleClick} disabled={state.assignStatus ? true : ""}>Assign</button></td>
     </tr>)
   }
 }
 const mapStateToProps = (state) => {
   return {
-    technicians: state.login.technicians
+    technicians: state.login.technicians,
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -55,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
     isCompleted: (index) => dispatch({
       type: 'COMPLETED_STATUS',
       payload: { index: index }
-    })
+    }),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TableData)
