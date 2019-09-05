@@ -6,7 +6,7 @@
 #table{
   margin-left: 30px;
   border-collapse: collapse;
-  background:whitesmoke;
+  /* background:whitesmoke; */
 }
 td,th{
   text-align: center;
