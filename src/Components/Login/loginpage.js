@@ -103,7 +103,7 @@ class LoginPage extends Component {
     if (!loggedIn) {
       return (
         <div className="formDiv">
-          <form className="form" onSubmit={this.handleSubmit}>
+          <form className="formwidth" onSubmit={this.handleSubmit}>
             <p className="login">LOG IN</p>
             <div className="textboxDiv">
               <i className="fa fa-user icon" aria-hidden="true"></i>

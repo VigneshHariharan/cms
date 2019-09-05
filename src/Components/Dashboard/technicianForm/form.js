@@ -63,7 +63,8 @@ class Form extends Component {
 
 
     render() {
-        return (<div className="complaint-form tec" style={{ width: '30%', display: 'inline' }}>
+
+        return (<div className="technician" style={{ width: '30%', display: 'inline' }}>
             <button className="closeButton" name="form" onClick={this.props.show}>&times;</button>
             <form className="form" onSubmit={this.handleSumbit}>
 
