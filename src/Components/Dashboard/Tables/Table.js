@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import TableData from "./adminTable/tableData"
-import TableHead from "./adminTable/tableHead"
+import TableData from "./tableData"
+import TableHead from "./tableHead"
 import "./table.css"
 
 class Table extends Component {
