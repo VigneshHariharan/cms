@@ -25,7 +25,7 @@
 .form{
     width:300px;
     margin:auto;
-    height:600px;
+    height:500px;
 }
 .label{
     float: left;
@@ -41,7 +41,7 @@ form{
     width:100%
 }
 .container{
-    height:500px;
+    height:300px;
     margin:10px;
     margin-left:30px;
 }
