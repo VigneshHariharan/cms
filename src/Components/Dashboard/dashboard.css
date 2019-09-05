@@ -48,7 +48,9 @@ button:disabled{
     background:white;
     color:black;
     box-shadow: none;
+    opacity: .5;
 }
+
 #logout{
     border-color: aliceblue;    
     /* margin-left : 75%; */
