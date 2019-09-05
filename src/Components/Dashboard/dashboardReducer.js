@@ -8,6 +8,7 @@ const complaintInitialState = {
     technician: '',
     completeStatus: 'In progress',
     assignStatus: '',
+    assignedTechnician: '',
   },
   //complaints not working
   complaints: localStorage.getItem("complaints"),
@@ -25,6 +26,7 @@ export const complaintReducer = (state = complaintInitialState, action) => {
 
     case 'ASSIGN_TECHNICIAN':
       state.complaints[action.payload.index].technician = action.payload.technician
+      state.complaints[action.payload.index].assignedTechnician = action.payload.technician
       localStorage.setItem("assign", true)
       state.complaints[action.payload.index].assignStatus = localStorage.getItem("assign")
       localStorage.setItem('complaints', JSON.stringify(state.complaints))

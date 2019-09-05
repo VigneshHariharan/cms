@@ -26,7 +26,8 @@ class TableData extends Component {
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
       <td>{state.createdTime}</td>
-      <td><select disabled={state.assignStatus ? true : ""} onChange={this.handleSelect}>
+      <td><select value={state.assignedTechnician} disabled={state.assignStatus ? true : ""}
+        onChange={this.handleSelect}>
         {
           technicians.map((tech, i) => {
             return (
