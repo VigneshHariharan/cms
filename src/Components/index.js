@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./reduxManager"
-import ProtectRoutes from './protectRoutes';
 
 import LoginPage from "./Login/loginpage"
 import Dashboard from "./Dashboard/Dashboard"
-import ComplaintForm from "./Dashboard/complaintForm"
+import AdminDashboard from "./Dashboard/adminDashboard"
+import TechnicianDashboard from "./Dashboard/technicianDashboard"
+
 
 
 export default class Home extends Component {
@@ -14,16 +15,17 @@ export default class Home extends Component {
     return (
       <div>
         <Router>
-          <Switch>
-            <Provider store={store}>
+          <Provider store={store}>
+            <Switch>
               <Route exact path="/" component={LoginPage}></Route>
-              <ProtectRoutes exact path="/dashboard/" component={Dashboard} />
-              <ProtectRoutes exact path="/dashboard/complaintform/" component={ComplaintForm} />
-              {/* <Route exact path="*" component={() => <h1>Different Page</h1>} /> */}
-            </Provider>
-          </Switch>
+              <Route exact path="/dashboard/" component={Dashboard} />
+              <Route exact path="/admindashboard/" component={AdminDashboard} />
+              <Route exact path="/techniciandashboard/" component={TechnicianDashboard} />
+              <Route exact path="*" component={() => <h1>Different Page</h1>} />
+            </Switch>
+          </Provider>
         </Router>
-      </div >
+      </div>
     )
   }
 }

@@ -1,114 +1,63 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import UserDashboard from "./userDashboard"
-import Form from './technicianForm/form'
-
+import Table from "./Tables/Table"
+import ComplaintForm from "./complaintForm"
+import { connect } from "react-redux"
 import "./dashboard.css"
 
+
+
 class Dashboard extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      show: false,
-      visible: false,
+      token: localStorage.getItem("userToken") ? localStorage.getItem("userToken") : "",
+      show: false
     }
   }
 
   handleClick = (e) => {
-    this.setState({ show: !this.state.show })
     if (e.target.name === "logout") {
-      localStorage.removeItem("token")
+      this.props.logout()
+      this.setState({ token: localStorage.getItem("userToken") })
     }
-    else if (e.target.name === "form") {
-      this.setState({ visible: !this.state.visible })
+    else if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show })
     }
   }
 
   render() {
-    switch (localStorage.getItem("token")) {
-      case "loggedIn":
-        return (
-          <div>
-            <UserDashboard handleClick={this.handleClick}
-              complaints={this.state.complaints}
-              show={this.state.show}
-            />
-          </div>
-        )
-      case "adminLoggedIn":
-        return (
-          <div>
-            <UserDashboard handleClick={this.handleClick}
-              complaints={this.state.complaints}
-              show={this.state.show}
-            />
-            <br /><br />
-            <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
-            {this.state.visible ? <Form /> : ''}
+    if (this.state.token) {
+      return (
+        <div>
+          <UserDashboard handleClick={this.handleClick} token={this.state.token} />
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+          <br />
+          <div style={{ width: '100%', display: 'flex' }}>
+            <Table></Table>
 
+            {/* Complaint form only shows when "add a complaint" button is pressed
+            ..................and add complaints to the table file.
+         */}
+
+            {
+              this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
+            }
           </div>
-        )
-      case "technicianLoggedIn":
-        return (<div>
-          <h1>Technician</h1>
-          <UserDashboard handleClick={this.handleClick}
-            complaints={this.state.complaints}
-            show={this.state.show}
-          />
         </div>
-        )
-
-      default:
-        return <Redirect to="/"></Redirect>
+      )
     }
+    else
+      return <Redirect to="/" ></Redirect>
+  }
 
-    // if (localStorage.getItem("token") === "loggedIn") {
-    //   return (
-    //     <div>
-    //       <UserDashboard handleClick={this.handleClick}
-    //         complaints={this.state.complaints}
-    //         show={this.state.show}
-    //       />
-    //     </div>
-    //   )
-    // }
-    // else if (localStorage.getItem("token") === "adminLoggedIn") {
-    //   return (
-    //     <div>
-    //       <UserDashboard handleClick={this.handleClick}
-    //         complaints={this.state.complaints}
-    //         show={this.state.show}
-    //       />
-    //       <br /><br />
-    //       <button name="form" onClick={this.handleClick}>Add a Technician</button>
-    //       {this.state.visible ? <Form /> : ''}
-
-    //     </div>
-    //   )
-    // }
-    // else if (localStorage.getItem("token") === "technicianLoggedIn") {
-    //   return (<div>
-    //     <h1>Technician</h1>
-    //     <UserDashboard handleClick={this.handleClick}
-    //       complaints={this.state.complaints}
-    //       show={this.state.show}
-    //     />
-    //   </div>
-    //   )
-    // }
-    // else {
-    //   return <Redirect to="/"></Redirect>
-    // }
-
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch({ type: "USER_LOGOUT" })
   }
 }
 
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     shouldLogout: () => dispatch({
-//       type: "LOGOUT"
-//     })
-//   }
-// }
-export default Dashboard
+export default connect(null, mapDispatchToProps)(Dashboard)

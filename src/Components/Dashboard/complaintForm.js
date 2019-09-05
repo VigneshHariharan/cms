@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import './Form.css'
 
+import 'font-awesome/css/font-awesome.min.css';
 // time
 let formatAMPM = (date) => {
   let hours = date.getHours();
@@ -22,9 +24,17 @@ class ComplaintForm extends Component {
       floor: "floor-1",
       systemNumber: "",
       description: "",
-      err: false
+      err: false,
+      formErr: "",
     }
+    // this.blockRef=React.createRef()
+    // this.floorRef=React.createRef()
+    this.systemRef = React.createRef()
+    this.descRef = React.createRef()
   }
+  // componentDidMount(){
+  //   this.blockRef.current.focus()
+  // }
 
   handleChange = (e) => {
     // System Number
@@ -48,7 +58,8 @@ class ComplaintForm extends Component {
       this.setState({ floorView: false })
     }
   }
-  // comme
+
+
   floorMap = (blockValue) => {
     switch (blockValue) {
       // case "block-1":
@@ -63,11 +74,30 @@ class ComplaintForm extends Component {
         return this.setState({ floorNo: [1, 2, 3, 4] })
     }
   }
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter' && e.target.name === 'systemNumber') {
+      // if(e.target.name==='block'){
+      //   this.floorRef.current.focus()
+      // }
+      // else if(e.target.name==='floor'){
+      //   this.systemRef.current.focus()
+      // }
+      // if(e.target.name==='systemNumber'){
+      this.descRef.current.focus()
+      // }
+    }
+  }
 
-  handleClick = () => {
+  handleClick = (e) => {
     const { block, floor, systemNumber, description } = this.state
-    if (parseInt(systemNumber) % 1 === 0) {
+    if (parseInt(systemNumber) % 1 === 0 && this.state.description !== "") {
       this.props.setForm(block, floor, systemNumber, description)
+      this.setState({ err: false })
+
+      if (e.target.name === "submit") {
+        console.log(this.state.formErr)
+        this.setState({ formErr: true })
+      }
     }
     else {
       this.setState({ err: true })
@@ -79,6 +109,7 @@ class ComplaintForm extends Component {
       systemNumber: "",
       description: "",
     })
+
   }
 
   handleSubmit(e) {
@@ -87,62 +118,64 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>ComplaintForm</h1>
-        <button onClick={this.props.show}>Close</button>
 
-        <form onSubmit={this.handleSubmit}>
+      <form style={{ width: '30%', display: 'block' }} className="container complaint-form" onSubmit={this.handleSubmit}>
+        <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
+        <h1 className="heading">Complaint-Form</h1>
+        {/* Block */}
+        <label className="label">Block : </label>&nbsp;
+          <select
+          name="block"
+          id="myList"
+          onChange={this.handleChange}
+        >
+          {/* <option></option> */}
+          <option>block-1</option>
+          <option>block-2</option>
+          <option>block-3</option>
+          <option>block-4</option>
+        </select><br></br>
 
-          {/* Block */}
-          <label>Block : </label>&nbsp;
-          <select name="block"
-            id="myList"
-            onChange={this.handleChange}
-          // value={this.state.block}
-          >
-            {/* <option></option> */}
-            <option>block-1</option>
-            <option>block-2</option>
-            <option>block-3</option>
-            <option>block-4</option>
-          </select><br></br>
+        {/* Floor */}
+        <label className="label">Floor : </label>&nbsp;
+          <select
+          name="floor"
+          onChange={this.handleChange}
+          id="myList"
+        >
+          {/* <option></option> */}
+          {
+            this.state.floorNo ? this.state.floorNo.map((i) => {
+              return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
+            }) : ""
+          }
+        </select><br></br>
 
-          {/* Floor */}
-          <label>Floor : </label>&nbsp;
-          <select name="floor"
-            onChange={this.handleChange}
-            id="myList"
+        {/* System Number */}
+        <label className="label">System Number : </label>
+        <input
+          ref={this.systemRef}
+          onKeyPress={this.handleKeyPress}
+          name="systemNumber"
+          type="number"
+          onChange={this.handleChange}
+          step={1}
+          value={this.state.systemNumber}
+        ></input><br></br>
 
-          // value={this.state.floor}
-          >
-            {/* <option></option> */}
-            {
-              this.state.floorNo ? this.state.floorNo.map((i) => {
-                return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
-              }) : ""
-            }
-          </select><br></br>
+        {/* Description */}
+        <label className="label">Description :</label>
+        <textarea
+          ref={this.descRef}
+          name="description"
+          onChange={this.handleChange}
+          value={this.state.description}
+        ></textarea> <br></br>
+        <button name="submit" className="submit" onClick={this.handleClick} type="submit">Submit</button>
+        {this.state.err ? <p style={{ display: "inline", fontSize: "16px", marginLeft: "80px", marginRight: "10px" }}>Enter a number</p> : ""}
+        {this.state.formErr ? <p style={{ color: "green" }}>form submitted</p> : ""}
 
-          {/* System Number */}
-          <label>System Number : </label>
-          <input name="systemNumber"
-            type="number"
-            onChange={this.handleChange}
-            step={1}
-            value={this.state.systemNumber}
-          ></input><br></br>
-          {this.state.err ? <p>Enter a number</p> : ""}
-
-
-          {/* Description */}
-          <label>Description :</label>
-          <textarea name="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          ></textarea><br></br>
-          <button onClick={this.handleClick} type="submit">Submit</button>
-        </form>
-      </div >
+      </form >
     )
   }
 }
@@ -151,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setForm: (block, floor, systemNumber, description) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()),technician:''
+        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }
