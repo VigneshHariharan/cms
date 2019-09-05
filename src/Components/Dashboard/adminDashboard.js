@@ -39,9 +39,9 @@ class AdminDashboard extends Component {
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
           <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
           <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
-          <br /><br/>
-          <div style={{ width: '100%', display: 'inline' }}>
-         
+          <br /><br />
+          <div style={{ width: '100%', display: 'flex' }}>
+
             <Table></Table>
             {
               this.state.visible ? <Form className="technicianform" show={this.handleClick} /> : ""
@@ -53,7 +53,7 @@ class AdminDashboard extends Component {
             {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
-            
+
           </div>
         </div>
       )

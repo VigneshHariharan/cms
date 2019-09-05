@@ -110,67 +110,63 @@ class ComplaintForm extends Component {
 
   render() {
     return (
-          <div>
-          <form  style={{ width: '30%',display:'inline' }}  className="container complaint-form"  onSubmit={this.handleSubmit}>
-          <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
+
+      <form style={{ width: '30%', display: 'block' }} className="container complaint-form" onSubmit={this.handleSubmit}>
+        <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
         <h1 className="heading">Complaint-Form</h1>
-            {/* Block */}
-            <label className="label">Block : </label>&nbsp;
+        {/* Block */}
+        <label className="label">Block : </label>&nbsp;
           <select
-              name="block"
-              id="myList"
-              onChange={this.handleChange}
-            // value={this.state.block}
-            >
-              {/* <option></option> */}
-              <option>block-1</option>
-              <option>block-2</option>
-              <option>block-3</option>
-              <option>block-4</option>
-            </select><br></br>
+          name="block"
+          id="myList"
+          onChange={this.handleChange}
+        >
+          {/* <option></option> */}
+          <option>block-1</option>
+          <option>block-2</option>
+          <option>block-3</option>
+          <option>block-4</option>
+        </select><br></br>
 
-            {/* Floor */}
-            <label className="label">Floor : </label>&nbsp;
+        {/* Floor */}
+        <label className="label">Floor : </label>&nbsp;
           <select
-              name="floor"
-              onChange={this.handleChange}
-              id="myList"
+          name="floor"
+          onChange={this.handleChange}
+          id="myList"
+        >
+          {/* <option></option> */}
+          {
+            this.state.floorNo ? this.state.floorNo.map((i) => {
+              return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
+            }) : ""
+          }
+        </select><br></br>
 
-            // value={this.state.floor}
-            >
-              {/* <option></option> */}
-              {
-                this.state.floorNo ? this.state.floorNo.map((i) => {
-                  return (<option key={(i * 100).toString()}>{`floor-${i}`}</option>)
-                }) : ""
-              }
-            </select><br></br>
-
-            {/* System Number */}
-            <label className="label">System Number : </label>
-            <input
-              ref={this.systemRef}
-              onKeyPress={this.handleKeyPress}
-              name="systemNumber"
-              type="number"
-              onChange={this.handleChange}
-              step={1}
-              value={this.state.systemNumber}
-            ></input><br></br>
-            {this.state.err ? <p>Enter a number</p> : ""}
+        {/* System Number */}
+        <label className="label">System Number : </label>
+        <input
+          ref={this.systemRef}
+          onKeyPress={this.handleKeyPress}
+          name="systemNumber"
+          type="number"
+          onChange={this.handleChange}
+          step={1}
+          value={this.state.systemNumber}
+        ></input><br></br>
+        {this.state.err ? <p>Enter a number</p> : ""}
 
 
-            {/* Description */}
-            <label className="label">Description :</label>
-            <textarea
-              ref={this.descRef}
-              name="description"
-              onChange={this.handleChange}
-              value={this.state.description}
-            ></textarea><br></br>
-            <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
-          </form>
-          </div>
+        {/* Description */}
+        <label className="label">Description :</label>
+        <textarea
+          ref={this.descRef}
+          name="description"
+          onChange={this.handleChange}
+          value={this.state.description}
+        ></textarea><br></br>
+        <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
+      </form>
     )
   }
 }

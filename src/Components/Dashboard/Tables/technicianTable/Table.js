@@ -29,7 +29,6 @@ class Table extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     complaints: state.complaint.complaints,
     technicians: state.login.technicians,
