@@ -10,7 +10,8 @@ class Form extends Component {
             firstName: '',
             lastName: '',
             password: '',
-            cPassword: ''
+            cPassword: '',
+            submitFeedback:'Enter the above details to sumbit the form!'
         }
         this.firstnameRef = React.createRef()
         this.lastnameRef = React.createRef()
@@ -55,7 +56,8 @@ class Form extends Component {
                 firstName: '',
                 lastName: '',
                 password: '',
-                cPassword: ''
+                cPassword: '',
+                submitFeedback:'Successfully submitted'
             })
         }
     }
@@ -66,9 +68,11 @@ class Form extends Component {
 
         return (<div className="technician" style={{ width: '30%', display: 'inline' }}>
             <button className="closeButton" name="form" onClick={this.props.show}>&times;</button>
-            <form className="form" onSubmit={this.handleSumbit}>
-
+            
+               
+               <form className="form" onSubmit={this.handleSumbit}>
                 <h1 className="heading">Technician Details</h1>
+                
                 <div className="container">
                     <label className="label">First Name<span className="asterick">*</span></label>
                     <input className="technician-form" ref={this.firstnameRef} type="text" name="firstName" required value={this.state.firstName} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
@@ -83,9 +87,14 @@ class Form extends Component {
                     <label className="label"> Confirm Password <span className="asterick">*</span></label>
                     <input className="technician-form" ref={this.cpasswordRef} type="password" name="cPassword" required value={this.state.cPassword} onChange={this.handleChange} />
                     <br />
+                   {this.state.submitFeedback!=='Successfully submitted'?<label className="label" style={{display:'inline'}}>Enter the above details to sumbit the form!</label >:<label  style={{color:"green"}}>Succesfully submitted!</label>}
+                   {/* {this.state.submitFeedback==='Successfully submitted'? :''} */}
+                  
                     <button className="submit" type="submit" onClick={this.handleClick}>submit</button>
+                    
                 </div>
-            </form>
+                
+              </form>
         </div>
         )
     }

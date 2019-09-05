@@ -34,8 +34,8 @@ class Dashboard extends Component {
         <div>
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
           <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
-          <br /><br /><br />
-          <div style={{ width: '100%', display: 'inline' }}>
+          <br />
+          <div style={{ width: '100%', display: 'flex' }}>
             <Table></Table>
 
             {/* Complaint form only shows when "add a complaint" button is pressed
