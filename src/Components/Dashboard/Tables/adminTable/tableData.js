@@ -7,7 +7,7 @@ class TableData extends Component {
     this.state = {
       selectedOption: localStorage.getItem('technicians') ?
         JSON.parse(localStorage.getItem('technicians'))[0].username : '',
-      assign: localStorage.getItem("assign"),
+      assign: localStorage.getItem("assign") ? true : "",
     }
   }
 
