@@ -6,7 +6,6 @@
 #table{
   margin-left: 30px;
   border-collapse: collapse;
-  background:whitesmoke;
 }
 td,th{
   text-align: center;
@@ -50,4 +49,11 @@ tr{
 td:hover,tr:hover{
   background:#29B6F6;
   color:white;
+}
+
+.assign{
+width:200px;
+}
+.assign button{
+  margin-left:20px ;
 }

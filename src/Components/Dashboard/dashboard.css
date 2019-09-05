@@ -44,7 +44,11 @@ button:hover{
     color:white;
     box-shadow: 1px 1px 1px 1px rgba(50,50,50 0.75);
 }
-
+button:disabled{
+    background:white;
+    color:black;
+    box-shadow: none;
+}
 #logout{
     border-color: aliceblue;    
     /* margin-left : 75%; */

@@ -7,10 +7,7 @@ export default class TableHead extends Component {
       <th>System Number</th>
       <th>Description</th>
       <th>Created Time</th>
-      {localStorage.getItem("token") === "adminLoggedIn" ?
-
-        <th className="assign-function">Assign Function</th> : <th></th>}
-      {localStorage.getItem("token") === "technicianLoggedIn" ?
-        <th className="status">Status</th> : <th className="hidden"></th>}</tr>)
+      <th className="assign-function">Assign Function</th>
+    </tr>)
   }
 }

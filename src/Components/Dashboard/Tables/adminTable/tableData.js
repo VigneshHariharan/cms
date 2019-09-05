@@ -5,12 +5,22 @@ class TableData extends Component {
   constructor() {
     super()
     this.state = {
-      selectedOption: localStorage.getItem('technicians') ? JSON.parse(localStorage.getItem('technicians'))[0].username : '',
+      selectedOption: localStorage.getItem('technicians') ?
+        JSON.parse(localStorage.getItem('technicians'))[0].username : '',
+      assign: localStorage.getItem("assign"),
     }
   }
+
   handleSelect = (e) => {
     this.setState({ selectedOption: e.target.value })
   }
+
+  handleClick = () => {
+    localStorage.setItem("assign", true)
+    this.setState({ assign: localStorage.getItem("assign") })
+    this.props.assignTechnician(this.state.selectedOption, this.props.index)
+  }
+
   render() {
     const technicians = localStorage.getItem("technicians") ? this.props.technicians : []
     const state = this.props.state
@@ -19,16 +29,15 @@ class TableData extends Component {
       <td>{state.systemNumber}</td>
       <td>{state.description}</td>
       <td>{state.createdTime}</td>
-      {localStorage.getItem("adminToken") === "adminLoggedIn" ?
-        <td><select onChange={this.handleSelect}>
-          {
-            technicians.map((tech, i) => {
-              return (
-                <option key={(i * 1000).toString()}>{tech.username}</option>
-              )
-            })
-          }</select>
-          <button onClick={() => this.props.assignTechnician(this.state.selectedOption, this.props.index)}>Assign</button></td> : <td className="hidden"></td>}
+      <td><select disabled={this.state.assign} onChange={this.handleSelect}>
+        {
+          technicians.map((tech, i) => {
+            return (
+              <option key={(i * 1000).toString()}>{tech.username}</option>
+            )
+          })
+        }</select>
+        <button onClick={this.handleClick} disabled={this.state.assign}>Assign</button></td>
     </tr>)
   }
 }
