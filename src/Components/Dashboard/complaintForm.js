@@ -24,7 +24,8 @@ class ComplaintForm extends Component {
       floor: "floor-1",
       systemNumber: "",
       description: "",
-      err: false
+      err: false,
+      formErr: "",
     }
     // this.blockRef=React.createRef()
     // this.floorRef=React.createRef()
@@ -87,10 +88,17 @@ class ComplaintForm extends Component {
     }
   }
 
-  handleClick = () => {
+  handleClick = (e) => {
     const { block, floor, systemNumber, description } = this.state
-    if (parseInt(systemNumber) % 1 === 0) {
+    if (parseInt(systemNumber) % 1 === 0 && this.state.description !== "") {
       this.props.setForm(block, floor, systemNumber, description)
+      this.setState({ err: false })
+      console.log(this.state.formErr, e.target)
+
+      if (e.target.name === "submit") {
+        console.log(this.state.formErr)
+        this.setState({ formErr: true })
+      }
     }
     else {
       this.setState({ err: true })
@@ -102,6 +110,7 @@ class ComplaintForm extends Component {
       systemNumber: "",
       description: "",
     })
+
   }
 
   handleSubmit(e) {
@@ -154,8 +163,6 @@ class ComplaintForm extends Component {
           step={1}
           value={this.state.systemNumber}
         ></input><br></br>
-        {this.state.err ? <p>Enter a number</p> : ""}
-
 
         {/* Description */}
         <label className="label">Description :</label>
@@ -164,9 +171,12 @@ class ComplaintForm extends Component {
           name="description"
           onChange={this.handleChange}
           value={this.state.description}
-        ></textarea><br></br>
-        <button className="submit" onClick={this.handleClick} type="submit">Submit</button>
-      </form>
+        ></textarea> <br></br>
+        <button name="submit" className="submit" onClick={this.handleClick} type="submit">Submit</button>
+        {this.state.err ? <p style={{ display: "inline", fontSize: "16px", marginLeft: "80px", marginRight: "10px" }}>Enter a number</p> : ""}
+        {this.state.formErr ? <p style={{ color: "green" }}>form submitted</p> : ""}
+
+      </form >
     )
   }
 }
