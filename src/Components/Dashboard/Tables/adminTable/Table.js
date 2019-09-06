@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import "../table.css"
+// import { assignTechnician } from "./actionCreators"
 
 class Table extends Component {
   constructor() {

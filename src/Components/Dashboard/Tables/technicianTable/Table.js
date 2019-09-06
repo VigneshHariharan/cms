@@ -1,49 +1,48 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from "react-redux"
-// import TableData from "./tableData"
-// import TableHead from "./tableHead"
+
 import "../table.css"
 
-class Table extends Component {
+const Table = (props) => {
+  let complaints = localStorage.getItem("complaints") ? props.complaints : [];
+  return (
 
-  render() {
-    let complaints = localStorage.getItem("complaints") ? this.props.complaints : [];
-    return (
+    <table id="table" style={{ width: '60%', display: 'inline' }}>
+      <thead>
+        <tr><th className="block">Block</th>
+          <th>Floor</th>
+          <th>System Number</th>
+          <th>Description</th>
+          <th>Created Time</th>
+          <th className="status">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {complaints ? complaints.map((state, index) => {
+          const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
+          return (props.technicianUsername === state.technician ?
+            <tr>
+              <td className="block">{state.block}</td>
+              <td>{state.floor}</td>
+              <td>{state.systemNumber}</td>
+              <td>{state.description}</td>
+              <td>{state.createdTime}</td>
+              <td className="status">
+                <button disabled={completeStatus}
+                  onClick={() => props.isCompleted(index)}>
+                  {completeStatus ? "Completed" : "complete"}</button>
+                {completeStatus ? "Completed" : "in-progess"}</td>
+            </tr>
+            : <tr key={((index + 1) * 8000).toString()}></tr>)
+        }) : ""
+        }
+      </tbody>
+    </table>
 
-      <table id="table" style={{ width: '60%', display: 'inline' }}>
-        <thead>
-          <tr><th className="block">Block</th>
-            <th>Floor</th>
-            <th>System Number</th>
-            <th>Description</th>
-            <th>Created Time</th>
-            <th className="status">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {complaints ? complaints.map((state, index) => {
-            const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
-            return (this.props.technicianUsername === state.technician ?
-              <tr>
-                <td className="block">{state.block}</td>
-                <td>{state.floor}</td>
-                <td>{state.systemNumber}</td>
-                <td>{state.description}</td>
-                <td>{state.createdTime}</td>
-                <td className="status">
-                  <button disabled={completeStatus}
-                    onClick={() => this.props.isCompleted(index)}>
-                    {completeStatus ? "Completed" : "complete"}</button>{completeStatus ? "Completed" : "in-progess"}</td>
-              </tr>
-              : <tr key={((index + 1) * 8000).toString()}></tr>)
-          }) : ""
-          }
-        </tbody>
-      </table>
+  )
 
-    )
-  }
 }
+
 
 const mapStateToProps = (state) => {
   return {
