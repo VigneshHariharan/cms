@@ -4,3 +4,10 @@ export const assignTechnician = (technicianName, index) => {
     payload: { technician: technicianName, index }
   }
 }
+
+export const approveStatus = (index) => {
+  return {
+    type: 'APPROVED_STATUS',
+    payload: { index }
+  }
+}
