@@ -18,17 +18,16 @@ class AdminDashboard extends Component {
     }
   }
 
-  handleClick = (e) => {
-    if (e.target.name === "form") {
+  handleTechnicianClick = () => {
       this.setState({ visible: !this.state.visible, show: false })
     }
-    else if (e.target.name === "complaintform") {
+  handleComplaintClick=()=>{
       this.setState({ show: !this.state.show, visible: false })
     }
-    else if (e.target.name === "logout") {
+  handleLogoutClick=()=>{
       this.props.logout()
       this.setState({ token: localStorage.getItem("adminToken") })
-    }
+    
   }
 
   render() {
@@ -36,18 +35,18 @@ class AdminDashboard extends Component {
     if (localStorage.getItem("adminToken"))
       return (
         <div>
-          <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
-          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+          <UserDashboard handleClick={this.handleLogoutClick} token={this.state.token} />
+          <button id="Add-a-Technican" name="form" onClick={this.handleTechnicianClick}>Add a Technician</button>
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleComplaintClick}>Add a Complaint</button>
           <br /><br />
           <div style={{ width: '100%', display: 'flex' }}>
 
             <Table></Table>
             {
-              this.state.visible ? <Form className="technicianform" show={this.handleClick} /> : ""
+              this.state.visible ? <Form className="technicianform" show={this.handleTechnicianClick} /> : ""
             }
             {
-              this.state.show ? <ComplaintForm show={this.handleClick} sendBy="admin" /> : ""
+              this.state.show ? <ComplaintForm show={this.handleComplaintClick} sendBy="admin" /> : ""
             }
 
             {/* Complaint form only shows when "add a complaint" button is pressed

@@ -27,17 +27,11 @@ class ComplaintForm extends Component {
       err: false,
       formErr: "",
     }
-    // this.blockRef=React.createRef()
-    // this.floorRef=React.createRef()
     this.systemRef = React.createRef()
     this.descRef = React.createRef()
   }
-  // componentDidMount(){
-  //   this.blockRef.current.focus()
-  // }
 
-  handleChange = (e) => {
-    // System Number
+  handleSystemNumber=(e)=>{
     if (e.target.name === "systemNumber") {
       if (Number.isInteger(parseInt(e.target.value))) {
         this.setState({ systemNumber: e.target.value })
@@ -46,7 +40,8 @@ class ComplaintForm extends Component {
         return this.setState({ err: true })
       }
     }
-
+  }
+  handleChange = (e) => {
     // separate for floor and system number
     if (e.target.name !== "floor" && e.target.name !== "systemNumber") {
       this.setState({ [e.target.name]: e.target.value })
@@ -76,15 +71,7 @@ class ComplaintForm extends Component {
   }
   handleKeyPress = (e) => {
     if (e.key === 'Enter' && e.target.name === 'systemNumber') {
-      // if(e.target.name==='block'){
-      //   this.floorRef.current.focus()
-      // }
-      // else if(e.target.name==='floor'){
-      //   this.systemRef.current.focus()
-      // }
-      // if(e.target.name==='systemNumber'){
       this.descRef.current.focus()
-      // }
     }
   }
 
@@ -158,7 +145,7 @@ class ComplaintForm extends Component {
           onKeyPress={this.handleKeyPress}
           name="systemNumber"
           type="number"
-          onChange={this.handleChange}
+          onChange={this.handleSystemNumber}
           step={1}
           value={this.state.systemNumber}
         ></input><br></br>
