@@ -22,7 +22,7 @@ const Table = (props) => {
              const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
              const approvedStatus = JSON.parse(localStorage.getItem('complaints'))[index].approvedStatus === 'Completed'
             return (props.technicianUsername === state.technician ?
-              <tr>
+              <tr key={(index*1001).toString()}>
       <td className="block">{state.block}</td>
       <td>{state.floor}</td>
       <td>{state.systemNumber}</td>
