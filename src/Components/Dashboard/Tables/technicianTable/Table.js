@@ -40,6 +40,7 @@ const Table = (props) => {
     </table>)
 }
 
+
 const mapStateToProps = (state) => {
   return {
     complaints: state.complaint.complaints,

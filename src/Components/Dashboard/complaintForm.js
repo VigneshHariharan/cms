@@ -106,7 +106,7 @@ class ComplaintForm extends Component {
   render() {
     return (
 
-      <form style={{ width: '30%', display: 'block' }} className="container complaint-form" onSubmit={this.handleSubmit}>
+      <form style={{ width: '30%', display: 'block' }}  className="container complaint-form" onSubmit={this.handleSubmit}>
         <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
         <h1 className="heading">Complaint-Form</h1>
         {/* Block */}
