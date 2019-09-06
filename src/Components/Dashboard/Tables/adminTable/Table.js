@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import "../table.css"
+// import { assignTechnician } from "./actionCreators"
 
 class Table extends Component {
   constructor() {
     super()
     this.state = {
-      selectedOption:localStorage.getItem('technicians')? JSON.parse(localStorage.getItem('technicians'))[0].username:'',
+      selectedOption: localStorage.getItem('technicians') ? JSON.parse(localStorage.getItem('technicians'))[0].username : '',
     }
   }
 
@@ -15,7 +16,7 @@ class Table extends Component {
   }
 
   handleClick = (index) => {
-    this.props.assignTechnician(this.state.selectedOption,index)
+    this.props.assignTechnician(this.state.selectedOption, index)
   }
   handleButtonClick=(index)=>{
     this.props.ApprovedStatus(index)
@@ -88,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)

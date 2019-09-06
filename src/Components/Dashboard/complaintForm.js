@@ -89,11 +89,10 @@ class ComplaintForm extends Component {
   }
 
   handleClick = (e) => {
-    console.log(this.props.sendBy)
     const { block, floor, systemNumber, description } = this.state
     if (parseInt(systemNumber) % 1 === 0 && this.state.description !== "") {
 
-      this.props.setForm(block, floor, systemNumber, description,this.props.sendBy)
+      this.props.setForm(block, floor, systemNumber, description, this.props.sendBy)
       this.setState({ err: false })
 
       if (e.target.name === "submit") {
@@ -183,9 +182,9 @@ class ComplaintForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setForm: (block, floor, systemNumber, description,sendBy) => dispatch({
+    setForm: (block, floor, systemNumber, description, sendBy) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description,sendBy, createdTime: formatAMPM(new Date()), technician: ''
+        block, floor, systemNumber, description, sendBy, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }

@@ -1,17 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from "react-redux"
-// import TableData from "./tableData"
-// import TableHead from "./tableHead"
+
 import "../table.css"
 
-class Table extends Component {
+const Table = (props) => {
+  let complaints = localStorage.getItem("complaints") ? props.complaints : [];
+  return (
 
-  render() {
-    let complaints = localStorage.getItem("complaints") ? this.props.complaints : [];
-    return (
-
-      <table id="table" style={{ width: '60%', display: 'inline' }}>
-        <thead>
+    <table id="table" style={{ width: '60%', display: 'inline' }}>
+      <thead>
         <tr><th className="block">Block</th>
       <th>Floor</th>
       <th>System Number</th>
@@ -24,7 +21,7 @@ class Table extends Component {
           {complaints ? complaints.map((state, index) => {
              const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
              const approvedStatus = JSON.parse(localStorage.getItem('complaints'))[index].approvedStatus === 'Completed'
-            return (this.props.technicianUsername === state.technician ?
+            return (props.technicianUsername === state.technician ?
               <tr>
       <td className="block">{state.block}</td>
       <td>{state.floor}</td>
@@ -33,18 +30,15 @@ class Table extends Component {
       <td>{state.createdTime}</td>
       <td className="status">
         <button disabled={completeStatus}
-          onClick={() => this.props.isCompleted(index)}>
+          onClick={() => props.isCompleted(index)}>
           Completed</button>{approvedStatus? "approved" : completeStatus?'Completed':'in-progress'}</td>
           </tr>
               : <tr key={((index + 1) * 8000).toString()}></tr>)
           }) : ""
           }
         </tbody>
-      </table>
-
-    )
-  }
-}
+      </table>)
+ }
 
 const mapStateToProps = (state) => {
   return {
@@ -62,4 +56,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)
