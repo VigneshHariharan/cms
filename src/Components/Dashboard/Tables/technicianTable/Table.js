@@ -23,6 +23,7 @@ class Table extends Component {
         <tbody>
           {complaints ? complaints.map((state, index) => {
              const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
+             const approvedStatus = JSON.parse(localStorage.getItem('complaints'))[index].approvedStatus === 'Completed'
             return (this.props.technicianUsername === state.technician ?
               <tr>
       <td className="block">{state.block}</td>
@@ -33,7 +34,7 @@ class Table extends Component {
       <td className="status">
         <button disabled={completeStatus}
           onClick={() => this.props.isCompleted(index)}>
-          Completed</button>{completeStatus ? "Completed" : "in-progess"}</td>
+          Completed</button>{approvedStatus? "approved" : completeStatus?'Completed':'in-progress'}</td>
           </tr>
               : <tr key={((index + 1) * 8000).toString()}></tr>)
           }) : ""
@@ -54,10 +55,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    assignTechnician: (technicianName, index) => dispatch({
-      type: 'ASSIGN_TECHNICIAN',
-      payload: { technician: technicianName, index }
-    }),
     isCompleted: (index) => dispatch({
       type: 'COMPLETED_STATUS',
       payload: { index: index }

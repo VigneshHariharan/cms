@@ -17,8 +17,13 @@ class Table extends Component {
   handleClick = (index) => {
     this.props.assignTechnician(this.state.selectedOption,index)
   }
+  handleButtonClick=(index)=>{
+    this.props.ApprovedStatus(index)
+
+  }
 
   render() {
+    
     const technicians = localStorage.getItem("technicians") ? this.props.technicians : []
     let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
     return (
@@ -30,6 +35,7 @@ class Table extends Component {
       <th>Description</th>
       <th>Created Time</th>
       <th className="assign-function">Assign Function</th>
+      <th>Status</th>
     </tr>
         </thead>
         <tbody>
@@ -50,6 +56,9 @@ class Table extends Component {
               }</select>
               <button onClick={()=>this.handleClick(index)} 
               disabled={state.assignStatus ? true : ""}>Assign</button></td>
+              <td>{state.completeStatus?'completed':'in-progress'}
+              <button onClick={()=>this.handleButtonClick(index)} 
+              disabled={state.approvedStatus===state.completeStatus?true:false}>Approve</button></td>
           </tr>
           }) : ""
           }
@@ -72,10 +81,10 @@ const mapDispatchToProps = (dispatch) => {
       type: 'ASSIGN_TECHNICIAN',
       payload: { technician: technicianName, index }
     }),
-    isCompleted: (index) => dispatch({
-      type: 'COMPLETED_STATUS',
-      payload: { index: index }
-    }),
+    ApprovedStatus:(index)=>dispatch({
+      type:'APPROVED_STATUS',
+      payload:{index}
+    })
   }
 }
 

@@ -22,7 +22,7 @@ class Table extends Component {
             <td>{state.systemNumber}</td>
             <td>{state.description}</td>
             <td>{state.createdTime}</td>
-            <td>{state.completeStatus?'completed':'in-progress'}</td>
+            <td>{state.approvedStatus==='Completed'?'completed':'in-progress'}</td>
             </tr>:<tr className="hidden" key={index} ><td></td></tr>
           }) : ""
           }
