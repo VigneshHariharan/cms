@@ -1,20 +1,13 @@
 import React from 'react'
-
-
-class UserDashboard extends React.Component{
-  render(){
+const UserDashboard =(props)=>{
     return (
       <div>
         <div id="dashboard">
           <h1 id="heading">Dashboard</h1>
-          <button id="logout" name="logout" onClick={this.props.handleClick}>Logout</button>
+          <button id="logout" name="logout" onClick={props.handleClick}>Logout</button>
         </div>
-        {/* upper right */}
-        {/* <br></br><br /><br /> */}
-        {/* Table - List of data*/}
       </div>
     )
-  
-}}
+}
 
 export default UserDashboard

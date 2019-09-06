@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from "react-redux"
 import "./table.css"
 
-class Table extends Component {
-  render() {
-    let complaints = localStorage.getItem("complaints") ? this.props.complaints : []
+const Table =(props)=>{
+  
+    let complaints = localStorage.getItem("complaints") ? props.complaints : []
     return (
       <table id="table" style={{ width: '60%', display: 'inline' }}>
         <thead>
@@ -30,7 +30,7 @@ class Table extends Component {
       </table>
     )
   }
-}
+
 
 const mapStateToProps = (state) => {
   return {
