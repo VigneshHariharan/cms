@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import TableData from "./tableData"
-import TableHead from "./tableHead"
 import "./table.css"
 
 class Table extends Component {
@@ -10,17 +8,26 @@ class Table extends Component {
     return (
       <table id="table" style={{ width: '60%', display: 'inline' }}>
         <thead>
-          <TableHead></TableHead>
+        <tr><th className="block">Block</th>
+      <th>Floor</th>
+      <th>System Number</th>
+      <th>Description</th>
+      <th>Created Time</th>
+      <th>Status</th></tr>
         </thead>
         <tbody>
           {complaints ? complaints.map((state, index) => {
-            return <TableData state={state}
-              index={index} key={(index * 10000).toString()} />
+            return state.sendBy!=='admin'?<tr key={index}><td className="block">{state.block}</td>
+            <td>{state.floor}</td>
+            <td>{state.systemNumber}</td>
+            <td>{state.description}</td>
+            <td>{state.createdTime}</td>
+            <td>{state.completeStatus?'completed':'in-progress'}</td>
+            </tr>:<tr className="hidden" key={index} ><td></td></tr>
           }) : ""
           }
         </tbody>
       </table>
-
     )
   }
 }

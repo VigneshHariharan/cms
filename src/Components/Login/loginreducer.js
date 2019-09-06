@@ -32,16 +32,17 @@ const loginInitialState = {
     password: "AdminPass1"
   }],
   technicians: localStorage.getItem("technicians") ? JSON.parse(localStorage.getItem("technicians")) : []
+
 }
 
 export const loginReducer = (state = loginInitialState, action) => {
-  const payload = action.payload
   switch (action.type) {
     // Login checks in their respective storage login for users,admin,technicians
     case "LOGIN":
-      localStorage.setItem('usernameOfUser', payload.username)
-      localStorage.setItem('passwordOfUser', payload.password)
+      localStorage.setItem('usernameOfUser', action.payload.username)
+      localStorage.setItem('passwordOfUser', action.payload.password)
       localStorage.setItem("userToken", "loggedIn")
+      localStorage.setItem("token", 'loggedIn')
       return {
         ...state, userLogin: {
           username: localStorage.getItem("usernameOfUser"),
@@ -52,9 +53,10 @@ export const loginReducer = (state = loginInitialState, action) => {
       }
 
     case "ADMIN_LOGIN":
-      localStorage.setItem('usernameOfAdmin', payload.username)
-      localStorage.setItem('passwordOfAdmin', payload.password)
+      localStorage.setItem('usernameOfAdmin', action.payload.username)
+      localStorage.setItem('passwordOfAdmin', action.payload.password)
       localStorage.setItem("adminToken", 'adminLoggedIn')
+      localStorage.setItem("token", 'adminLoggedIn')
       return {
         ...state, adminLogin: {
           username: localStorage.getItem("usernameOfAdmin"),
@@ -65,9 +67,10 @@ export const loginReducer = (state = loginInitialState, action) => {
       }
 
     case "TECHNICIAN_LOGIN":
-      localStorage.setItem('usernameOfTechnician', payload.username)
-      localStorage.setItem('passwordOfTechnician', payload.password)
+      localStorage.setItem('usernameOfTechnician', action.payload.username)
+      localStorage.setItem('passwordOfTechnician', action.payload.password)
       localStorage.setItem("technicianToken", 'technicianLoggedIn')
+      localStorage.setItem("token", 'technicianLoggedIn')
       return {
         ...state,
         technicianLogin: {

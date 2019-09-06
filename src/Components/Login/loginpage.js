@@ -24,10 +24,15 @@ class LoginPage extends Component {
     if (!localStorage.getItem('token')) {
       this.userRef.current.focus();
     }
+    // console.log(this.myRef)
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+    // console.log(e.target.value)
+    // if(e.key==='Enter'){
+    //   this.passwordRef.current.focus()
+    // }
   }
   handleKeyPress = (e) => {
     // console.log(this.state.error)
@@ -79,7 +84,10 @@ class LoginPage extends Component {
     const { technicians, shouldTechnicianLogin } = this.props
     return technicians.map((technicians) => {
       if (username === technicians.username
-        && password === technicians.password) {
+        && password === technicians.password) 
+        {
+    console.log(username,password,technicians)
+
         return shouldTechnicianLogin(username, password)
       }
       else {
@@ -108,6 +116,7 @@ class LoginPage extends Component {
               <i className="fa fa-lock icon"></i>
               <input ref={this.passwordRef} placeholder="Password" className="textbox" name="password" type="password" onChange={this.handleChange}></input>
             </div> <br />
+
             {
               this.state.error ? <i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"><p className="errorMsg">{this.state.error}</p></i> : ''
             }

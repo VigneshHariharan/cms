@@ -19,12 +19,13 @@ class Dashboard extends Component {
   }
 
   handleClick = (e) => {
-    this.props.logout()
-    this.setState({ token: localStorage.getItem("userToken") })
-  }
-
-  handleComplaint = () => {
-    this.setState({ show: !this.state.show })
+    if (e.target.name === "logout") {
+      this.props.logout()
+      this.setState({ token: localStorage.getItem("userToken") })
+    }
+    else if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show })
+    }
   }
 
   render() {
@@ -32,8 +33,7 @@ class Dashboard extends Component {
       return (
         <div>
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleComplaint
-          }> Add a Complaint</button>
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
           <br />
           <div style={{ width: '100%', display: 'flex' }}>
             <Table></Table>
@@ -41,8 +41,9 @@ class Dashboard extends Component {
             {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
          */}
+
             {
-              this.state.show ? <ComplaintForm show={this.handleComplaint} /> : ""
+              this.state.show ? <ComplaintForm show={this.handleClick} sendBy="user" /> : ""
             }
           </div>
         </div>
