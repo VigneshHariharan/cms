@@ -93,7 +93,6 @@ class ComplaintForm extends Component {
     if (parseInt(systemNumber) % 1 === 0 && this.state.description !== "") {
       this.props.setForm(block, floor, systemNumber, description)
       this.setState({ err: false })
-
       if (e.target.name === "submit") {
         console.log(this.state.formErr)
         this.setState({ formErr: true })
