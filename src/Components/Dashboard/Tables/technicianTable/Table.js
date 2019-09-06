@@ -10,39 +10,35 @@ const Table = (props) => {
     <table id="table" style={{ width: '60%', display: 'inline' }}>
       <thead>
         <tr><th className="block">Block</th>
-          <th>Floor</th>
-          <th>System Number</th>
-          <th>Description</th>
-          <th>Created Time</th>
-          <th className="status">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {complaints ? complaints.map((state, index) => {
-          const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
-          return (props.technicianUsername === state.technician ?
-            <tr>
-              <td className="block">{state.block}</td>
-              <td>{state.floor}</td>
-              <td>{state.systemNumber}</td>
-              <td>{state.description}</td>
-              <td>{state.createdTime}</td>
-              <td className="status">
-                <button disabled={completeStatus}
-                  onClick={() => props.isCompleted(index)}>
-                  {completeStatus ? "Completed" : "complete"}</button>
-                {completeStatus ? "Completed" : "in-progess"}</td>
-            </tr>
-            : <tr key={((index + 1) * 8000).toString()}></tr>)
-        }) : ""
-        }
-      </tbody>
-    </table>
-
-  )
-
-}
-
+      <th>Floor</th>
+      <th>System Number</th>
+      <th>Description</th>
+      <th>Created Time</th>
+      <th className="status">Status</th>
+    </tr>
+        </thead>
+        <tbody>
+          {complaints ? complaints.map((state, index) => {
+             const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
+             const approvedStatus = JSON.parse(localStorage.getItem('complaints'))[index].approvedStatus === 'Completed'
+            return (props.technicianUsername === state.technician ?
+              <tr>
+      <td className="block">{state.block}</td>
+      <td>{state.floor}</td>
+      <td>{state.systemNumber}</td>
+      <td>{state.description}</td>
+      <td>{state.createdTime}</td>
+      <td className="status">
+        <button disabled={completeStatus}
+          onClick={() => props.isCompleted(index)}>
+          Completed</button>{approvedStatus? "approved" : completeStatus?'Completed':'in-progress'}</td>
+          </tr>
+              : <tr key={((index + 1) * 8000).toString()}></tr>)
+          }) : ""
+          }
+        </tbody>
+      </table>)
+ }
 
 const mapStateToProps = (state) => {
   return {
@@ -53,10 +49,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    assignTechnician: (technicianName, index) => dispatch({
-      type: 'ASSIGN_TECHNICIAN',
-      payload: { technician: technicianName, index }
-    }),
     isCompleted: (index) => dispatch({
       type: 'COMPLETED_STATUS',
       payload: { index: index }
