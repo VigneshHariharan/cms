@@ -12,29 +12,29 @@ class Table extends Component {
 
       <table id="table" style={{ width: '60%', display: 'inline' }}>
         <thead>
-        <tr><th className="block">Block</th>
-      <th>Floor</th>
-      <th>System Number</th>
-      <th>Description</th>
-      <th>Created Time</th>
-      <th className="status">Status</th>
-    </tr>
+          <tr><th className="block">Block</th>
+            <th>Floor</th>
+            <th>System Number</th>
+            <th>Description</th>
+            <th>Created Time</th>
+            <th className="status">Status</th>
+          </tr>
         </thead>
         <tbody>
           {complaints ? complaints.map((state, index) => {
-             const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
+            const completeStatus = JSON.parse(localStorage.getItem('complaints'))[index].completeStatus === 'Completed'
             return (this.props.technicianUsername === state.technician ?
               <tr>
-      <td className="block">{state.block}</td>
-      <td>{state.floor}</td>
-      <td>{state.systemNumber}</td>
-      <td>{state.description}</td>
-      <td>{state.createdTime}</td>
-      <td className="status">
-        <button disabled={completeStatus}
-          onClick={() => this.props.isCompleted(index)}>
-          Completed</button>{completeStatus ? "Completed" : "in-progess"}</td>
-          </tr>
+                <td className="block">{state.block}</td>
+                <td>{state.floor}</td>
+                <td>{state.systemNumber}</td>
+                <td>{state.description}</td>
+                <td>{state.createdTime}</td>
+                <td className="status">
+                  <button disabled={completeStatus}
+                    onClick={() => this.props.isCompleted(index)}>
+                    {completeStatus ? "Completed" : "complete"}</button>{completeStatus ? "Completed" : "in-progess"}</td>
+              </tr>
               : <tr key={((index + 1) * 8000).toString()}></tr>)
           }) : ""
           }
@@ -65,4 +65,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)

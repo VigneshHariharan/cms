@@ -6,7 +6,7 @@ class Table extends Component {
   constructor() {
     super()
     this.state = {
-      selectedOption:localStorage.getItem('technicians')? JSON.parse(localStorage.getItem('technicians'))[0].username:'',
+      selectedOption: localStorage.getItem('technicians') ? JSON.parse(localStorage.getItem('technicians'))[0].username : '',
     }
   }
 
@@ -15,7 +15,7 @@ class Table extends Component {
   }
 
   handleClick = (index) => {
-    this.props.assignTechnician(this.state.selectedOption,index)
+    this.props.assignTechnician(this.state.selectedOption, index)
   }
 
   render() {
@@ -24,33 +24,33 @@ class Table extends Component {
     return (
       <table id="table" style={{ width: '60%', display: 'inline' }}>
         <thead>
-      <tr><th className="block">Block</th>
-      <th>Floor</th>
-      <th>System Number</th>
-      <th>Description</th>
-      <th>Created Time</th>
-      <th className="assign-function">Assign Function</th>
-    </tr>
+          <tr><th className="block">Block</th>
+            <th>Floor</th>
+            <th>System Number</th>
+            <th>Description</th>
+            <th>Created Time</th>
+            <th className="assign-function">Assign Function</th>
+          </tr>
         </thead>
         <tbody>
           {complaints ? complaints.map((state, index) => {
-            return <tr key={(index*2000).toString()}><td className="block">{state.block}</td>
-            <td>{state.floor}</td>
-            <td>{state.systemNumber}</td>
-            <td>{state.description}</td>
-            <td>{state.createdTime}</td>
-            <td><select value={state.assignedTechnician} disabled={state.assignStatus ? true : ""}
-              onChange={this.handleSelect}><option>--select any one--</option>
-              {
-                technicians.map((tech, i) => {
-                  return (
-                    <option key={(i * 1000).toString()}>{tech.username}</option>
-                  )
-                })
-              }</select>
-              <button onClick={()=>this.handleClick(index)} 
-              disabled={state.assignStatus ? true : ""}>Assign</button></td>
-          </tr>
+            return <tr key={(index * 2000).toString()}><td className="block">{state.block}</td>
+              <td>{state.floor}</td>
+              <td>{state.systemNumber}</td>
+              <td>{state.description}</td>
+              <td>{state.createdTime}</td>
+              <td><select value={state.assignedTechnician} disabled={state.assignStatus ? true : ""}
+                onChange={this.handleSelect}><option>--select any one--</option>
+                {
+                  technicians.map((tech, i) => {
+                    return (
+                      <option key={(i * 1000).toString()}>{tech.username}</option>
+                    )
+                  })
+                }</select>
+                <button onClick={() => this.handleClick(index)}
+                  disabled={state.assignStatus ? true : ""}>{state.assignStatus ? "Assigned" : "Assign"}</button></td>
+            </tr>
           }) : ""
           }
         </tbody>
@@ -79,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)
