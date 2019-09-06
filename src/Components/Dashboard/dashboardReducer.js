@@ -9,6 +9,7 @@ const complaintInitialState = {
     completeStatus: 'In progress',
     assignStatus: '',
     assignedTechnician: '',
+    sendBy:''
   },
   //complaints not working
   complaints: localStorage.getItem("complaints"),

@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 
-class UserDashboard extends Component {
-  render() {
-
+class UserDashboard extends React.Component{
+  render(){
     return (
       <div>
         <div id="dashboard">
@@ -15,7 +14,7 @@ class UserDashboard extends Component {
         {/* Table - List of data*/}
       </div>
     )
-  }
-}
+  
+}}
 
 export default UserDashboard

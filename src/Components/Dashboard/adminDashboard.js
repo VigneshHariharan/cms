@@ -19,16 +19,16 @@ class AdminDashboard extends Component {
   }
 
   handleClick = (e) => {
-    this.props.logout()
-    this.setState({ token: localStorage.getItem("adminToken") })
-  }
-
-  handleComplaint = () => {
-    this.setState({ show: !this.state.show, visible: false })
-  }
-
-  handleTechnicianForm = () => {
-    this.setState({ visible: !this.state.visible, show: false })
+    if (e.target.name === "form") {
+      this.setState({ visible: !this.state.visible, show: false })
+    }
+    else if (e.target.name === "complaintform") {
+      this.setState({ show: !this.state.show, visible: false })
+    }
+    else if (e.target.name === "logout") {
+      this.props.logout()
+      this.setState({ token: localStorage.getItem("adminToken") })
+    }
   }
 
   render() {
@@ -37,17 +37,17 @@ class AdminDashboard extends Component {
       return (
         <div>
           <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <button id="Add-a-Technican" name="form" onClick={this.handleTechnicianForm}>Add a Technician</button>
-          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleComplaint}>Add a Complaint</button>
+          <button id="Add-a-Technican" name="form" onClick={this.handleClick}>Add a Technician</button>
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
           <br /><br />
           <div style={{ width: '100%', display: 'flex' }}>
 
             <Table></Table>
             {
-              this.state.visible ? <Form className="technicianform" show={this.handleTechnicianForm} /> : ""
+              this.state.visible ? <Form className="technicianform" show={this.handleClick} /> : ""
             }
             {
-              this.state.show ? <ComplaintForm show={this.handleComplaint} /> : ""
+              this.state.show ? <ComplaintForm show={this.handleClick} sendBy="admin" /> : ""
             }
 
             {/* Complaint form only shows when "add a complaint" button is pressed
