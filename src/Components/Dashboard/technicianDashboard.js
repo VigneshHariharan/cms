@@ -15,17 +15,15 @@ class TechnicianDashboard extends Component {
     }
   }
 
-  handleClick = (e) => {
-    if (e.target.name === "logout") {
+  handleLogout = (e) => {
       this.props.logout()
       this.setState({ token: localStorage.getItem("technicianToken") })
     }
-  }
 
   render() {
     if (this.state.token)
       return (<div>
-        <UserDashboard handleClick={this.handleClick} token={this.state.token} />
+        <UserDashboard handleClick={this.handleLogout} token={this.state.token} />
         <br/>
         <Table></Table>
       </div>

@@ -27,9 +27,7 @@ class Form extends Component {
         e.preventDefault()
     }
     handleChange(e) {
-
         this.setState({ [e.target.name]: e.target.value })
-
     }
     handleKeyPress = (e) => {
 
@@ -62,14 +60,11 @@ class Form extends Component {
         }
     }
 
-
-
     render() {
 
         return (<div className="technician" style={{ width: '30%', display: 'inline' }}>
             <button className="closeButton" name="form" onClick={this.props.show}>&times;</button>
-            
-               
+
                <form className="form" onSubmit={this.handleSumbit}>
                 <h1 className="heading">Technician Details</h1>
                 
@@ -79,7 +74,6 @@ class Form extends Component {
                     <br />
                     <label className="label"> Last Name<span className="asterick">*</span></label>
                     <input className="technician-form" ref={this.lastnameRef} type="text" name="lastName" required value={this.state.lastName} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
-                    {/* <input type="text" name="userName" value={`${this.state.firstName} ${this.state.lastName}`} onChange={this.handleChange}/> */}
                     <br />
                     <label className="label"> Password<span className="asterick">*</span></label>
                     <input className="technician-form" ref={this.passwordRef} type="password" name="password" required value={this.state.password} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
@@ -88,8 +82,6 @@ class Form extends Component {
                     <input className="technician-form" ref={this.cpasswordRef} type="password" name="cPassword" required value={this.state.cPassword} onChange={this.handleChange} />
                     <br />
                    {this.state.submitFeedback!=='Successfully submitted'?<label className="label" style={{display:'inline'}}>Enter the above details to sumbit the form!</label >:<label  style={{color:"green"}}>Succesfully submitted!</label>}
-                   {/* {this.state.submitFeedback==='Successfully submitted'? :''} */}
-                  
                     <button className="submit" type="submit" onClick={this.handleClick}>submit</button>
                     
                 </div>

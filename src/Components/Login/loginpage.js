@@ -24,23 +24,15 @@ class LoginPage extends Component {
     if (!localStorage.getItem('token')) {
       this.userRef.current.focus();
     }
-    // console.log(this.myRef)
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
-    // console.log(e.target.value)
-    // if(e.key==='Enter'){
-    //   this.passwordRef.current.focus()
-    // }
   }
   handleKeyPress = (e) => {
-    // console.log(this.state.error)
     if (e.key === 'Enter') {
       this.passwordRef.current.focus();
-      console.log(this.state.error, 'enter')
     }
-
   }
 
   handleClick = () => {
@@ -85,7 +77,8 @@ class LoginPage extends Component {
     const { technicians, shouldTechnicianLogin } = this.props
     return technicians.map((technicians) => {
       if (username === technicians.username
-        && password === technicians.password) {
+        && password === technicians.password) 
+        {
         return shouldTechnicianLogin(username, password)
       }
       else {

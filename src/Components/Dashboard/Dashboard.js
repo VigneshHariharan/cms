@@ -17,23 +17,20 @@ class Dashboard extends Component {
       show: false
     }
   }
+  handleComplaintform=(e)=>{
+    this.setState({ show: !this.state.show })
+  }
 
-  handleClick = (e) => {
-    if (e.target.name === "logout") {
+  handleLogout = (e) => {
       this.props.logout()
       this.setState({ token: localStorage.getItem("userToken") })
     }
-    else if (e.target.name === "complaintform") {
-      this.setState({ show: !this.state.show })
-    }
-  }
-
   render() {
     if (this.state.token) {
       return (
         <div>
-          <UserDashboard handleClick={this.handleClick} token={this.state.token} />
-          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleClick}>Add a Complaint</button>
+          <UserDashboard handleClick={this.handleLogout} token={this.state.token} />
+          <button id="Add-a-Complaint" name="complaintform" onClick={this.handleComplaintform}>Add a Complaint</button>
           <br />
           <div style={{ width: '100%', display: 'flex' }}>
             <Table></Table>
@@ -43,7 +40,7 @@ class Dashboard extends Component {
          */}
 
             {
-              this.state.show ? <ComplaintForm show={this.handleClick} /> : ""
+              this.state.show ? <ComplaintForm show={this.handleComplaintform} sendBy="user" /> : ""
             }
           </div>
         </div>

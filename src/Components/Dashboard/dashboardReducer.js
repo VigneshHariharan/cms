@@ -9,6 +9,8 @@ const complaintInitialState = {
     completeStatus: 'In progress',
     assignStatus: '',
     assignedTechnician: '',
+    sendBy: '',
+    approvedStatus: 'not-approved'
   },
   //complaints not working
   complaints: localStorage.getItem("complaints"),
@@ -18,6 +20,7 @@ const complaintInitialState = {
 export const complaintReducer = (state = complaintInitialState, action) => {
   switch (action.type) {
     case "ADD_LIST":
+
       if (!localStorage.getItem("complaints")) {
         state.complaints = []
       }
@@ -58,6 +61,13 @@ export const complaintReducer = (state = complaintInitialState, action) => {
       localStorage.removeItem("passwordOfAdmin")
       localStorage.removeItem("adminToken")
       return { ...state }
+
+    case 'APPROVED_STATUS':
+      state.complaints[action.payload.index].approvedStatus = 'Completed'
+      localStorage.setItem('complaints', JSON.stringify(state.complaints))
+      return {
+        ...state, complaints: JSON.parse(localStorage.getItem("complaints"))
+      }
 
     default:
       if (!localStorage.getItem("complaints")) {

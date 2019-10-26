@@ -27,17 +27,11 @@ class ComplaintForm extends Component {
       err: false,
       formErr: "",
     }
-    // this.blockRef=React.createRef()
-    // this.floorRef=React.createRef()
     this.systemRef = React.createRef()
     this.descRef = React.createRef()
   }
-  // componentDidMount(){
-  //   this.blockRef.current.focus()
-  // }
 
-  handleChange = (e) => {
-    // System Number
+  handleSystemNumber=(e)=>{
     if (e.target.name === "systemNumber") {
       if (Number.isInteger(parseInt(e.target.value))) {
         this.setState({ systemNumber: e.target.value })
@@ -46,7 +40,8 @@ class ComplaintForm extends Component {
         return this.setState({ err: true })
       }
     }
-
+  }
+  handleChange = (e) => {
     // separate for floor and system number
     if (e.target.name !== "floor" && e.target.name !== "systemNumber") {
       this.setState({ [e.target.name]: e.target.value })
@@ -76,26 +71,18 @@ class ComplaintForm extends Component {
   }
   handleKeyPress = (e) => {
     if (e.key === 'Enter' && e.target.name === 'systemNumber') {
-      // if(e.target.name==='block'){
-      //   this.floorRef.current.focus()
-      // }
-      // else if(e.target.name==='floor'){
-      //   this.systemRef.current.focus()
-      // }
-      // if(e.target.name==='systemNumber'){
       this.descRef.current.focus()
-      // }
     }
   }
 
   handleClick = (e) => {
     const { block, floor, systemNumber, description } = this.state
     if (parseInt(systemNumber) % 1 === 0 && this.state.description !== "") {
-      this.props.setForm(block, floor, systemNumber, description)
+
+      this.props.setForm(block, floor, systemNumber, description, this.props.sendBy)
       this.setState({ err: false })
 
       if (e.target.name === "submit") {
-        console.log(this.state.formErr)
         this.setState({ formErr: true })
       }
     }
@@ -119,7 +106,7 @@ class ComplaintForm extends Component {
   render() {
     return (
 
-      <form style={{ width: '30%', display: 'block' }} className="container complaint-form" onSubmit={this.handleSubmit}>
+      <form style={{ width: '30%', display: 'block' }}  className="container complaint-form" onSubmit={this.handleSubmit}>
         <button className="closeButton" name="complaintform" onClick={this.props.show}>&times;</button>
         <h1 className="heading">Complaint-Form</h1>
         {/* Block */}
@@ -158,7 +145,7 @@ class ComplaintForm extends Component {
           onKeyPress={this.handleKeyPress}
           name="systemNumber"
           type="number"
-          onChange={this.handleChange}
+          onChange={this.handleSystemNumber}
           step={1}
           value={this.state.systemNumber}
         ></input><br></br>
@@ -182,9 +169,9 @@ class ComplaintForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setForm: (block, floor, systemNumber, description) => dispatch({
+    setForm: (block, floor, systemNumber, description, sendBy) => dispatch({
       type: "ADD_LIST", payload: {
-        block, floor, systemNumber, description, createdTime: formatAMPM(new Date()), technician: ''
+        block, floor, systemNumber, description, sendBy, createdTime: formatAMPM(new Date()), technician: ''
       }
     })
   }
