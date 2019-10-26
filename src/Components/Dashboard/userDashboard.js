@@ -2,29 +2,23 @@ import React, { Component } from 'react'
 
 import Table from "./Table"
 import ComplaintForm from "./complaintForm"
-import Form from './technicianForm/form'
 
 export default class UserDashboard extends Component {
-  constructor(){
-    super()
-    this.state={
-      visible:false,
-    }
-  }
-  handleClick=()=>{
-    this.setState({visible:!this.state.visible})
-  }
 
   render() {
     return (
       <div>
-        <h1>Dashboard</h1>
+        <div id="dashboard">
+          <h1 id="heading">Dashboard</h1>
+          <button id="logout" name="logout" onClick={this.props.handleClick}>Logout</button>
+        </div>
         {/* upper right */}
-        <button onClick={this.props.handleClick}>Add a Complaint</button>
+
+        {localStorage.getItem('token')!=='technicianLoggedIn'?
+        <button id="Add-a-Complaint" onClick={this.props.handleClick}>Add a Complaint</button>:''}
         <br></br>
         {/* Table - List of data*/}
         <Table></Table>
-        <button name="logout" onClick={this.props.handleClick}>Logout</button>
 
         {/* Complaint form only shows when "add a complaint" button is pressed
             ..................and add complaints to the table file.
@@ -32,9 +26,6 @@ export default class UserDashboard extends Component {
         {
           this.props.show ? <ComplaintForm show={this.props.handleClick} /> : ""
         }
-        <br/><br/>
-        <button onClick={this.handleClick}>Add a Technician</button>
-        {this.state.visible?<Form/>:''}
 
       </div>
     )
