@@ -8,6 +8,7 @@ const complaintInitialState = {
     technician: '',
     completeStatus:'In progress'
   },
+  technicianName:'',
   //complaints not working
   complaints: localStorage.getItem("complaints"),
 }

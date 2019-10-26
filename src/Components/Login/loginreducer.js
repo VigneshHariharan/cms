@@ -66,6 +66,7 @@ export const loginReducer = (state = loginInitialState, action) => {
       return {
         ...state,
         technicians: JSON.parse(localStorage.getItem("technicians")),
+
       }
 
     default:
